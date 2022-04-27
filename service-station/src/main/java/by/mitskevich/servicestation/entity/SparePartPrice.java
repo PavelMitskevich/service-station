@@ -23,7 +23,7 @@ public class SparePartPrice implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private long id;
     @Column(name = "brand")
     private String brand;
     @Column(name = "vendor_code")
@@ -59,13 +59,15 @@ public class SparePartPrice implements Serializable {
     public int hashCode() {
         int result;
         long temp;
-        result = id;
+        result = (int) (id ^ (id >>> 32));
         result = 31 * result + (brand != null ? brand.hashCode() : 0);
         result = 31 * result + (vendorCode != null ? vendorCode.hashCode() : 0);
         temp = Double.doubleToLongBits(price);
         result = 31 * result + (int) (temp ^ (temp >>> 32));
         temp = Double.doubleToLongBits(discount);
         result = 31 * result + (int) (temp ^ (temp >>> 32));
+        result = 31 * result + (workOrders != null ? workOrders.hashCode() : 0);
+        result = 31 * result + (workPrices != null ? workPrices.hashCode() : 0);
         return result;
     }
 
