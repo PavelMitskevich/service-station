@@ -1,4 +1,4 @@
-package by.mitskevich.station.entity;
+package by.mitskevich.servicestation.entity;
 
 import lombok.*;
 

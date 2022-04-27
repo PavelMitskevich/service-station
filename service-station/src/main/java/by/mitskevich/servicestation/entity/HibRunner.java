@@ -1,12 +1,10 @@
-package by.mitskevich.station.entity;
+package by.mitskevich.servicestation.entity;
 
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.query.Query;
-
-import java.util.List;
 
 public class HibRunner {
     public static void main(String[] args) {
