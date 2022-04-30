@@ -1,13 +1,11 @@
 package by.mitskevich.servicestation.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serial;
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Objects;
 
@@ -15,27 +13,35 @@ import java.util.Objects;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 @Entity
 @Table(name = "spare_part_price", schema = "car_service_station")
 public class SparePartPrice implements Serializable {
+
     @Serial
     private static final long serialVersionUID = 851777120105557999L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+
     @Column(name = "brand")
     private String brand;
+
     @Column(name = "vendor_code")
     private String vendorCode;
+
     @Column(name = "price")
-    private double price;
+    private BigDecimal price;
+
     @Column(name = "discount")
     private double discount;
+
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "total_price", joinColumns = @JoinColumn(name = "spare_part_price_id"),
             inverseJoinColumns = @JoinColumn(name = "work_order_id"))
     private List<WorkOrder> workOrders;
+
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "total_price", joinColumns = @JoinColumn(name = "spare_part_price_id"),
             inverseJoinColumns = @JoinColumn(name = "work_price_id"))
@@ -49,10 +55,10 @@ public class SparePartPrice implements Serializable {
         SparePartPrice that = (SparePartPrice) o;
 
         if (id != that.id) return false;
-        if (Double.compare(that.price, price) != 0) return false;
         if (Double.compare(that.discount, discount) != 0) return false;
         if (!Objects.equals(brand, that.brand)) return false;
-        return Objects.equals(vendorCode, that.vendorCode);
+        if (!Objects.equals(vendorCode, that.vendorCode)) return false;
+        return Objects.equals(price, that.price);
     }
 
     @Override
@@ -62,12 +68,9 @@ public class SparePartPrice implements Serializable {
         result = (int) (id ^ (id >>> 32));
         result = 31 * result + (brand != null ? brand.hashCode() : 0);
         result = 31 * result + (vendorCode != null ? vendorCode.hashCode() : 0);
-        temp = Double.doubleToLongBits(price);
-        result = 31 * result + (int) (temp ^ (temp >>> 32));
+        result = 31 * result + (price != null ? price.hashCode() : 0);
         temp = Double.doubleToLongBits(discount);
         result = 31 * result + (int) (temp ^ (temp >>> 32));
-        result = 31 * result + (workOrders != null ? workOrders.hashCode() : 0);
-        result = 31 * result + (workPrices != null ? workPrices.hashCode() : 0);
         return result;
     }
 

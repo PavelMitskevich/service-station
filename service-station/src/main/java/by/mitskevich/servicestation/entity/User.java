@@ -15,24 +15,32 @@ import java.util.Objects;
 @Entity
 @Table(name = "users", schema = "car_service_station")
 public class User implements Serializable {
+
     @Serial
     private static final long serialVersionUID = -5615213320806993251L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+
     @Column(name = "first_name")
     private String firstName;
+
     @Column(name = "last_name")
     private String lastName;
+
     @Column(name = "login")
     private String login;
+
     @Column(name = "password")
     private String password;
+
     @Column(name = "email")
     private String email;
+
     @Column(name = "phone_number")
     private int phoneNumber;
+
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "role_id")
     private Role role;

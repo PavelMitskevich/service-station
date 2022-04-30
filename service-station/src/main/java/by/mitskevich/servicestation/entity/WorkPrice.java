@@ -1,19 +1,19 @@
 package by.mitskevich.servicestation.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serial;
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.List;
+import java.util.Objects;
 
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 @Entity
 @Table(name = "work_price", schema = "car_service_station")
 public class WorkPrice implements Serializable {
@@ -26,7 +26,7 @@ public class WorkPrice implements Serializable {
     @Column(name = "name")
     private String name;
     @Column(name = "price")
-    private double price;
+    private BigDecimal price;
     @Column(name = "discount")
     private double discount;
     @ManyToMany(fetch = FetchType.EAGER)
@@ -46,9 +46,9 @@ public class WorkPrice implements Serializable {
         WorkPrice workPrice = (WorkPrice) o;
 
         if (id != workPrice.id) return false;
-        if (Double.compare(workPrice.price, price) != 0) return false;
         if (Double.compare(workPrice.discount, discount) != 0) return false;
-        return name.equals(workPrice.name);
+        if (!Objects.equals(name, workPrice.name)) return false;
+        return Objects.equals(price, workPrice.price);
     }
 
     @Override
@@ -56,9 +56,8 @@ public class WorkPrice implements Serializable {
         int result;
         long temp;
         result = id;
-        result = 31 * result + name.hashCode();
-        temp = Double.doubleToLongBits(price);
-        result = 31 * result + (int) (temp ^ (temp >>> 32));
+        result = 31 * result + (name != null ? name.hashCode() : 0);
+        result = 31 * result + (price != null ? price.hashCode() : 0);
         temp = Double.doubleToLongBits(discount);
         result = 31 * result + (int) (temp ^ (temp >>> 32));
         return result;

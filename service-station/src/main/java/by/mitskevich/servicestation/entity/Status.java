@@ -16,12 +16,14 @@ import java.io.Serializable;
 @Entity
 @Table(name = "status", schema = "car_service_station")
 public class Status implements Serializable {
+
     @Serial
     private static final long serialVersionUID = 4931648625645297983L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+
     @Column(name = "name")
     private String name;
 

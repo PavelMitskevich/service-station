@@ -1,9 +1,6 @@
 package by.mitskevich.servicestation.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serial;
@@ -12,17 +9,20 @@ import java.util.Objects;
 
 @Getter
 @Setter
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
 @Table(name = "roles",schema = "car_service_station")
 public class Role implements Serializable {
+
     @Serial
     private static final long serialVersionUID = 7493382628684730438L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+
     @Column(name = "name")
     private String name;
 

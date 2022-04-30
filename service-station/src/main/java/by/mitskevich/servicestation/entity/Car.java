@@ -1,9 +1,6 @@
 package by.mitskevich.servicestation.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serial;
@@ -14,23 +11,30 @@ import java.util.Objects;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 @Entity
 @Table(name = "cars", schema = "car_service_station")
 public class Car implements Serializable {
+
     @Serial
     private static final long serialVersionUID = -3884445871217214134L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+
     @Column(name = "vin", unique = true)
     private String vin;
+
     @Column(name = "brand")
     private String brand;
+
     @Column(name = "model")
     private String model;
+
     @Column(name = "year")
     private int year;
+
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id")
     private User user;
