@@ -10,21 +10,21 @@ import java.util.List;
 
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("/api/v1")
+@RequestMapping("/api/v1/roles")
 public class RoleController {
     private final RoleService roleService;
 
-    @GetMapping("/roles")
+    @GetMapping
     public List<RoleDTO> getRoles() {
         return roleService.getRoles();
     }
 
-    @PostMapping("/roles")
+    @PostMapping
     public Role createRole(@RequestBody RoleDTO request) {
         return roleService.createRole(request);
     }
 
-    @DeleteMapping("/role/{id}")
+    @DeleteMapping("/{id}")
     public void deleteRole(@PathVariable("id")Integer id) {
         roleService.deleteRole(id);
     }

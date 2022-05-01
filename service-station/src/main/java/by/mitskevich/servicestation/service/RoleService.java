@@ -14,7 +14,7 @@ public class RoleService {
     private final RoleRepository repository;
 
     public List<RoleDTO> getRoles() {
-
+        return null;
     }
 
     public Role createRole(RoleDTO request) {

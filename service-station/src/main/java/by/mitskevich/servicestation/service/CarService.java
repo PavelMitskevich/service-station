@@ -11,20 +11,25 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class CarService {
+
     private final CarRepository repository;
 
-    public List<Car> getCars() {
+    public List<CarDTO> getCars() {
         return null;
     }
 
-    public Car createCar(CarDTO request) {
+    public Car createCar(CarDTO carDTO) {
         return new Car();
     }
 
-    public Car updateCar(CarDTO request) {
+    public Car updateCar(CarDTO carDTO) {
         return new Car();
     }
 
     public void deleteCar(Long id) {
+    }
+
+    public Car getCarById(Long id) {
+        return repository.findById(id).get();
     }
 }

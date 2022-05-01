@@ -15,21 +15,26 @@ public class CarController {
     private final CarService carService;
 
     @GetMapping("/cars")
-    public List<Car> getCars() {
+    public List<CarDTO> getCars() {
         return carService.getCars();
     }
 
+    @GetMapping("/cars/{id}")
+    public Car getCarById(@PathVariable("id")Long id) {
+        return carService.getCarById(id);
+    }
+
     @PostMapping("/cars")
-    public Car createCar(@RequestBody CarDTO request) {
-        return carService.createCar(request);
+    public Car createCar(@RequestBody CarDTO carDTO) {
+        return carService.createCar(carDTO);
     }
 
-    @PutMapping("/car")
-    public Car updateCar(@RequestBody CarDTO request) {
-        return carService.updateCar(request);
+    @PutMapping("/cars")
+    public Car updateCar(@RequestBody CarDTO carDTO) {
+        return carService.updateCar(carDTO);
     }
 
-    @DeleteMapping("/car/{id}")
+    @DeleteMapping("/cars/{id}")
     public void deleteCar(@PathVariable("id")Long id) {
         carService.deleteCar(id);
     }
