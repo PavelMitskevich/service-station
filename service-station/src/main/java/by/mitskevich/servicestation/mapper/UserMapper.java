@@ -3,6 +3,7 @@ package by.mitskevich.servicestation.mapper;
 import by.mitskevich.servicestation.dto.UserDTO;
 import by.mitskevich.servicestation.entity.User;
 import lombok.experimental.UtilityClass;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.List;
 
@@ -11,25 +12,27 @@ public class UserMapper {
 
     public User userDtoToUser(UserDTO userDTO) {
         return User.builder()
+                .id(userDTO.getId())
                 .firstName(userDTO.getFirstName())
                 .lastName(userDTO.getLastName())
                 .login(userDTO.getLogin())
                 .password(userDTO.getPassword())
                 .email(userDTO.getEmail())
                 .phoneNumber(userDTO.getPhoneNumber())
-                .role(userDTO.getRole())
+                .role(RoleMapper.roleDtoToRole(userDTO.getRoleDTO()))
                 .build();
     }
 
     public UserDTO userToUserDTO(User user) {
         return UserDTO.builder()
+                .id(user.getId())
                 .firstName(user.getFirstName())
                 .lastName(user.getLastName())
                 .login(user.getLogin())
                 .password(user.getPassword())
                 .email(user.getEmail())
                 .phoneNumber(user.getPhoneNumber())
-                .role(user.getRole())
+                .roleDTO(RoleMapper.roleToRoleDTO(user.getRole()))
                 .build();
     }
 
@@ -44,7 +47,7 @@ public class UserMapper {
                         .password(userDTO.getPassword())
                         .email(userDTO.getEmail())
                         .phoneNumber(userDTO.getPhoneNumber())
-                        .role(userDTO.getRole())
+                        .role(RoleMapper.roleDtoToRole(userDTO.getRoleDTO()))
                         .build()).toList();
     }
 
@@ -59,7 +62,15 @@ public class UserMapper {
                         .password(user.getPassword())
                         .email(user.getEmail())
                         .phoneNumber(user.getPhoneNumber())
-                        .role(user.getRole())
+                        .roleDTO(RoleMapper.roleToRoleDTO(user.getRole()))
                         .build()).toList();
+    }
+
+    public UserDetails mapUserToCustomUser(User user) {
+        return org.springframework.security.core.userdetails.User.builder()
+                .username(user.getLogin())
+                .password(user.getPassword())
+                .roles(user.getRole().getName())
+                .build();
     }
 }

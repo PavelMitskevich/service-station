@@ -1,6 +1,7 @@
 package by.mitskevich.servicestation.service;
 
 import by.mitskevich.servicestation.entity.Role;
+import by.mitskevich.servicestation.mapper.RoleMapper;
 import by.mitskevich.servicestation.repository.RoleRepository;
 import by.mitskevich.servicestation.dto.RoleDTO;
 import lombok.RequiredArgsConstructor;
@@ -17,11 +18,12 @@ public class RoleService {
         return null;
     }
 
-    public Role createRole(RoleDTO request) {
+    public RoleDTO createRole(RoleDTO request) {
         Role role = Role.builder()
                 .name(request.getName())
                 .build();
-        return repository.save(role);
+        repository.save(role);
+        return RoleMapper.roleToRoleDTO(role);
     }
 
     public void deleteRole(Integer id) {

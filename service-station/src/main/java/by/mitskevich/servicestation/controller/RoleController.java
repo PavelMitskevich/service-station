@@ -20,7 +20,7 @@ public class RoleController {
     }
 
     @PostMapping
-    public Role createRole(@RequestBody RoleDTO request) {
+    public RoleDTO createRole(@RequestBody RoleDTO request) {
         return roleService.createRole(request);
     }
 

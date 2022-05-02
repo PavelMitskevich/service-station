@@ -3,6 +3,8 @@ package by.mitskevich.servicestation.service;
 import by.mitskevich.servicestation.dto.UserDTO;
 import by.mitskevich.servicestation.entity.Role;
 import by.mitskevich.servicestation.entity.User;
+import by.mitskevich.servicestation.mapper.RoleMapper;
+import by.mitskevich.servicestation.mapper.UserMapper;
 import by.mitskevich.servicestation.repository.UserRepository;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -27,21 +29,22 @@ class UserServiceTest {
     @BeforeEach
     void init() {
 
-        userService = new UserService(userRepository);
+        userService = new UserService(userRepository,null);
 
         role = Role.builder()
+                .id(3)
                 .name("USER")
                 .build();
 
         expectedUser = UserDTO.builder()
-                .id(6)
+                .id(8)
                 .firstName("Max")
                 .lastName("Brown")
                 .login("M.Brown")
                 .password("brown")
                 .email("m.b@gmail.com")
                 .phoneNumber(297889955)
-                .role(role)
+                .roleDTO(RoleMapper.roleToRoleDTO(role))
                 .build();
     }
 
@@ -60,7 +63,31 @@ class UserServiceTest {
     }
 
     @Test
+    @DisplayName("Testing create user to database")
+    @Tag("USERS-TEST")
     void createUser() {
+        UserDTO userDTO = UserDTO.builder()
+                .firstName("Max")
+                .lastName("Brown")
+                .login("M.Brown")
+                .password("brown")
+                .email("m.b@gmail.com")
+                .phoneNumber(297889955)
+                .roleDTO(RoleMapper.roleToRoleDTO(role))
+                .build();
+
+        User user = User.builder()
+                .firstName(userDTO.getFirstName())
+                .lastName(userDTO.getLastName())
+                .login(userDTO.getLogin())
+                .password(userDTO.getPassword())
+                .email(userDTO.getEmail())
+                .phoneNumber(userDTO.getPhoneNumber())
+                .role(RoleMapper.roleDtoToRole(userDTO.getRoleDTO()))
+                .build();
+        userRepository.save(user);
+        UserDTO actualUser = UserMapper.userToUserDTO(user);
+        Assertions.assertEquals(expectedUser, actualUser);
     }
 
     @Test

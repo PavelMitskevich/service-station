@@ -4,6 +4,7 @@ import by.mitskevich.servicestation.dto.UserDTO;
 import by.mitskevich.servicestation.entity.User;
 import by.mitskevich.servicestation.service.UserService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -21,11 +22,13 @@ public class UserController {
     }
 
     @GetMapping("/{id}")
+//    @PreAuthorize("hasAnyRole('ROLE_USER', 'ROLE_ADMIN')")
     public UserDTO getUserById(@PathVariable("id") Long id) {
         return userService.getUserById(id);
     }
 
     @PostMapping
+//    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public UserDTO createUser(@RequestBody UserDTO userDTO) {
         return userService.createUser(userDTO);
     }

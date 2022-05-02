@@ -28,5 +28,5 @@ public class UserDTO {
 
     private int phoneNumber;
 
-    private Role role;
+    private RoleDTO roleDTO;
 }
