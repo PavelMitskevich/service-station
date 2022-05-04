@@ -1,6 +1,5 @@
 package by.mitskevich.servicestation.dto;
 
-import by.mitskevich.servicestation.entity.User;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -24,5 +23,5 @@ public class CarDTO {
 
     private int year;
 
-    private User user;
+    private UserDTO user;
 }

@@ -63,7 +63,6 @@ public class UserService {
     }
 
     public void deleteUser(Long id) {
-        User user = UserMapper.userDtoToUser(getUserById(id));
-        repository.delete(user);
+        repository.deleteById(id);
     }
 }

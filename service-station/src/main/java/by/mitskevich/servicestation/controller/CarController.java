@@ -1,6 +1,5 @@
 package by.mitskevich.servicestation.controller;
 
-import by.mitskevich.servicestation.entity.Car;
 import by.mitskevich.servicestation.dto.CarDTO;
 import by.mitskevich.servicestation.service.CarService;
 import lombok.RequiredArgsConstructor;
@@ -23,22 +22,25 @@ public class CarController {
 
     @GetMapping("/{id}")
     @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_MANAGER')")
-    public Car getCarById(@PathVariable("id")Long id) {
+    public CarDTO getCarById(@PathVariable("id") Long id) {
         return carService.getCarById(id);
     }
 
     @PostMapping
-    public Car createCar(@RequestBody CarDTO carDTO) {
+    @PreAuthorize("hasAnyRole('ROLE_USER', 'ROLE_ADMIN', 'ROLE_MANAGER')")
+    public CarDTO createCar(@RequestBody CarDTO carDTO) {
         return carService.createCar(carDTO);
     }
 
-    @PutMapping
-    public Car updateCar(@RequestBody CarDTO carDTO) {
-        return carService.updateCar(carDTO);
+    @PutMapping("/{id}")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_MANAGER')")
+    public CarDTO updateCar(@PathVariable("id") Long id, @RequestBody CarDTO carDTO) {
+        return carService.updateCar(id, carDTO);
     }
 
     @DeleteMapping("/{id}")
-    public void deleteCar(@PathVariable("id")Long id) {
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_MANAGER')")
+    public void deleteCar(@PathVariable("id") Long id) {
         carService.deleteCar(id);
     }
 }

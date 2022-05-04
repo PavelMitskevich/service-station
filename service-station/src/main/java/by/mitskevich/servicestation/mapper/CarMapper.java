@@ -16,7 +16,7 @@ public class CarMapper {
                 .brand(carDTO.getBrand())
                 .model(carDTO.getModel())
                 .year(carDTO.getYear())
-                .user(carDTO.getUser())
+                .user(UserMapper.userDtoToUser(carDTO.getUser()))
                 .build();
     }
 
@@ -27,7 +27,7 @@ public class CarMapper {
                 .brand(car.getBrand())
                 .model(car.getModel())
                 .year(car.getYear())
-                .user(car.getUser())
+                .user(UserMapper.userToUserDTO(car.getUser()))
                 .build();
     }
 
