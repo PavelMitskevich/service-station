@@ -1,14 +1,14 @@
 package by.mitskevich.servicestation.service;
 
-import by.mitskevich.servicestation.dto.RoleDTO;
+import by.mitskevich.servicestation.dto.CreateUserDTO;
 import by.mitskevich.servicestation.dto.UserDTO;
+import by.mitskevich.servicestation.entity.Role;
 import by.mitskevich.servicestation.entity.User;
-import by.mitskevich.servicestation.mapper.RoleMapper;
 import by.mitskevich.servicestation.mapper.UserMapper;
 import by.mitskevich.servicestation.repository.RoleRepository;
 import by.mitskevich.servicestation.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
@@ -22,6 +22,8 @@ public class UserService {
 
     private final RoleRepository roleRepository;
 
+    private final PasswordEncoder passwordEncoder;
+
     public List<UserDTO> getUsers() {
         return UserMapper.usersToUsersDTO(repository.findAll());
     }
@@ -30,22 +32,29 @@ public class UserService {
         return UserMapper.userToUserDTO(repository.findById(id).orElseThrow(EntityNotFoundException::new));
     }
 
-    public UserDTO createUser(UserDTO userDTO) {
-        User user = User.builder()
-                .firstName(userDTO.getFirstName())
-                .lastName(userDTO.getLastName())
-                .login(userDTO.getLogin())
-                .password(userDTO.getPassword())
-                .email(userDTO.getEmail())
-                .phoneNumber(userDTO.getPhoneNumber())
-                .role(roleRepository.findById(3).
-                        orElseThrow(EntityNotFoundException::new))
-                .build();
+    public UserDTO createUser(CreateUserDTO createUserDTO) {
+
+        User user = UserMapper.userDtoToUser(createUserDTO);
+        user.setPassword(passwordEncoder.encode(createUserDTO.getPassword()));
+
+        if (user.getRole() == null) {
+            user.setRole(roleRepository.findByName("USER").orElseThrow(EntityNotFoundException::new));
+        }
+
         return UserMapper.userToUserDTO(repository.save(user));
     }
 
-    public UserDTO updateUser(UserDTO userDTO) {
-        return UserMapper.userToUserDTO(repository.save(UserMapper.userDtoToUser(userDTO)));
+    public UserDTO updateUser(Long id, CreateUserDTO createUserDTO) {
+
+        User user = repository.findById(id).orElseThrow(EntityNotFoundException::new);
+        Role role = user.getRole();
+
+        user = UserMapper.createUserDtoToUser(createUserDTO);
+        user.setId(id);
+        user.setPassword(passwordEncoder.encode(createUserDTO.getPassword()));
+        user.setRole(role);
+
+        return UserMapper.userToUserDTO(repository.save(user));
     }
 
     public void deleteUser(Long id) {

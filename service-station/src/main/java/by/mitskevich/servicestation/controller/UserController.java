@@ -1,7 +1,7 @@
 package by.mitskevich.servicestation.controller;
 
+import by.mitskevich.servicestation.dto.CreateUserDTO;
 import by.mitskevich.servicestation.dto.UserDTO;
-import by.mitskevich.servicestation.entity.User;
 import by.mitskevich.servicestation.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -17,28 +17,30 @@ public class UserController {
     private final UserService userService;
 
     @GetMapping
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_MANAGER')")
     public List<UserDTO> getUsers() {
         return userService.getUsers();
     }
 
     @GetMapping("/{id}")
-//    @PreAuthorize("hasAnyRole('ROLE_USER', 'ROLE_ADMIN')")
+    @PreAuthorize("hasAnyRole('ROLE_USER', 'ROLE_ADMIN', 'ROLE_MANAGER')")
     public UserDTO getUserById(@PathVariable("id") Long id) {
         return userService.getUserById(id);
     }
 
-    @PostMapping
-//    @PreAuthorize("hasRole('ROLE_ADMIN')")
-    public UserDTO createUser(@RequestBody UserDTO userDTO) {
-        return userService.createUser(userDTO);
+    @PostMapping("/register")
+    public UserDTO createUser(@RequestBody CreateUserDTO createUserDTO) {
+        return userService.createUser(createUserDTO);
     }
 
-    @PutMapping
-    public UserDTO updateUser(@RequestBody UserDTO userDTO) {
-        return userService.updateUser(userDTO);
+    @PutMapping("/{id}")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_MANAGER')")
+    public UserDTO updateUser(@PathVariable("id") Long id, @RequestBody CreateUserDTO createUserDTO) {
+        return userService.updateUser(id, createUserDTO);
     }
 
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public void deleteUser(@PathVariable("id") Long id) {
         userService.deleteUser(id);
     }

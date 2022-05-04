@@ -1,16 +1,21 @@
 package by.mitskevich.servicestation.service;
 
+import by.mitskevich.servicestation.dto.CreateUserDTO;
 import by.mitskevich.servicestation.dto.UserDTO;
 import by.mitskevich.servicestation.entity.Role;
 import by.mitskevich.servicestation.entity.User;
 import by.mitskevich.servicestation.mapper.RoleMapper;
 import by.mitskevich.servicestation.mapper.UserMapper;
+import by.mitskevich.servicestation.repository.RoleRepository;
 import by.mitskevich.servicestation.repository.UserRepository;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.security.crypto.password.PasswordEncoder;
+
+import javax.persistence.EntityNotFoundException;
 
 @SpringBootTest
 class UserServiceTest {
@@ -25,26 +30,28 @@ class UserServiceTest {
     @Autowired
     UserRepository userRepository;
 
+    @Autowired
+    RoleRepository roleRepository;
+
+    @Autowired
+    PasswordEncoder passwordEncoder;
+
 
     @BeforeEach
     void init() {
 
-        userService = new UserService(userRepository,null);
+        userService = new UserService(userRepository,roleRepository,passwordEncoder);
 
-        role = Role.builder()
-                .id(3)
-                .name("USER")
-                .build();
+        role = roleRepository.findByName("USER").orElseThrow();
 
         expectedUser = UserDTO.builder()
                 .id(8)
                 .firstName("Max")
                 .lastName("Brown")
                 .login("M.Brown")
-                .password("brown")
                 .email("m.b@gmail.com")
                 .phoneNumber(297889955)
-                .roleDTO(RoleMapper.roleToRoleDTO(role))
+                .role(RoleMapper.roleToRoleDTO(role))
                 .build();
     }
 
@@ -66,28 +73,23 @@ class UserServiceTest {
     @DisplayName("Testing create user to database")
     @Tag("USERS-TEST")
     void createUser() {
-        UserDTO userDTO = UserDTO.builder()
+        CreateUserDTO createUserDTO = CreateUserDTO.builder()
                 .firstName("Max")
                 .lastName("Brown")
                 .login("M.Brown")
                 .password("brown")
                 .email("m.b@gmail.com")
                 .phoneNumber(297889955)
-                .roleDTO(RoleMapper.roleToRoleDTO(role))
+                .role(RoleMapper.roleToRoleDTO(role))
                 .build();
+        User user = UserMapper.userDtoToUser(createUserDTO);
 
-        User user = User.builder()
-                .firstName(userDTO.getFirstName())
-                .lastName(userDTO.getLastName())
-                .login(userDTO.getLogin())
-                .password(userDTO.getPassword())
-                .email(userDTO.getEmail())
-                .phoneNumber(userDTO.getPhoneNumber())
-                .role(RoleMapper.roleDtoToRole(userDTO.getRoleDTO()))
-                .build();
+        user.setPassword(passwordEncoder.encode(createUserDTO.getPassword()));
+        user.setRole(roleRepository.findByName("USER").orElseThrow(EntityNotFoundException::new));
+
         userRepository.save(user);
         UserDTO actualUser = UserMapper.userToUserDTO(user);
-        Assertions.assertEquals(expectedUser, actualUser);
+        Assertions.assertEquals(expectedUser.getFirstName(), actualUser.getFirstName());
     }
 
     @Test

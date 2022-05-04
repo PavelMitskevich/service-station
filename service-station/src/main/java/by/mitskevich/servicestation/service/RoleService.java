@@ -19,13 +19,13 @@ public class RoleService {
     }
 
     public RoleDTO createRole(RoleDTO request) {
-        Role role = Role.builder()
-                .name(request.getName())
-                .build();
-        repository.save(role);
-        return RoleMapper.roleToRoleDTO(role);
+        return RoleMapper.roleToRoleDTO(repository.save(RoleMapper.roleDtoToRole(request)));
     }
 
     public void deleteRole(Integer id) {
+    }
+
+    public RoleDTO getRoleById(Integer id) {
+        return RoleMapper.roleToRoleDTO(repository.getById(id));
     }
 }

@@ -19,6 +19,11 @@ public class RoleController {
         return roleService.getRoles();
     }
 
+    @GetMapping("/{id}")
+    public RoleDTO getRoleById(@PathVariable("id") Integer id) {
+        return roleService.getRoleById(id);
+    }
+
     @PostMapping
     public RoleDTO createRole(@RequestBody RoleDTO request) {
         return roleService.createRole(request);

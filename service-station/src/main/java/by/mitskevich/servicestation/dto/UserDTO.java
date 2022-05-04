@@ -1,14 +1,14 @@
 package by.mitskevich.servicestation.dto;
 
-import by.mitskevich.servicestation.entity.Role;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
 
 @Data
-@Builder
+@SuperBuilder
 @AllArgsConstructor
 @NoArgsConstructor
 public class UserDTO {
@@ -22,11 +22,9 @@ public class UserDTO {
 
     private String login;
 
-    private String password;
-
     private String email;
 
     private int phoneNumber;
 
-    private RoleDTO roleDTO;
+    private RoleDTO role;
 }
