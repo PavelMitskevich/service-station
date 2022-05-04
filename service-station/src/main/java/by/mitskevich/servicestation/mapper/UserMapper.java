@@ -49,29 +49,15 @@ public class UserMapper {
     public List<User> usersDtoToUsers(List<UserDTO> userDTOS) {
         return userDTOS
                 .stream()
-                .map(userDTO -> User.builder()
-                        .id(userDTO.getId())
-                        .firstName(userDTO.getFirstName())
-                        .lastName(userDTO.getLastName())
-                        .login(userDTO.getLogin())
-                        .email(userDTO.getEmail())
-                        .phoneNumber(userDTO.getPhoneNumber())
-                        .role(RoleMapper.roleDtoToRole(userDTO.getRole()))
-                        .build()).collect(Collectors.toList());
+                .map(UserMapper::userDtoToUser)
+                .collect(Collectors.toList());
     }
 
     public List<UserDTO> usersToUsersDTO(List<User> users) {
         return  users
                 .stream()
-                .map(user -> UserDTO.builder()
-                        .id(user.getId())
-                        .firstName(user.getFirstName())
-                        .lastName(user.getLastName())
-                        .login(user.getLogin())
-                        .email(user.getEmail())
-                        .phoneNumber(user.getPhoneNumber())
-                        .role(RoleMapper.roleToRoleDTO(user.getRole()))
-                        .build()).collect(Collectors.toList());
+                .map(UserMapper::userToUserDTO)
+                .collect(Collectors.toList());
     }
 
     public UserDetails mapUserToCustomUser(User user) {

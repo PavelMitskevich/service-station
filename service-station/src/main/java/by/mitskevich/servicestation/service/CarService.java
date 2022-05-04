@@ -2,6 +2,7 @@ package by.mitskevich.servicestation.service;
 
 import by.mitskevich.servicestation.entity.Car;
 import by.mitskevich.servicestation.dto.CarDTO;
+import by.mitskevich.servicestation.mapper.CarMapper;
 import by.mitskevich.servicestation.repository.CarRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -15,7 +16,7 @@ public class CarService {
     private final CarRepository repository;
 
     public List<CarDTO> getCars() {
-        return null;
+        return CarMapper.carsToCarsDTO(repository.findAll());
     }
 
     public Car createCar(CarDTO carDTO) {
