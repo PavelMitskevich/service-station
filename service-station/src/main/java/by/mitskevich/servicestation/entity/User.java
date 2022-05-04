@@ -42,7 +42,7 @@ public class User implements Serializable {
     @Column(name = "phone_number")
     private int phoneNumber;
 
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "role_id")
     private Role role;
 
