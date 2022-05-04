@@ -26,10 +26,7 @@ public class RoleMapper {
 
     public static List<RoleDTO> rolesToRolesDTO(List<Role> roles) {
         return roles.stream()
-                .map(role -> RoleDTO.builder()
-                        .id(role.getId())
-                        .name(role.getName())
-                        .build())
+                .map(RoleMapper::roleToRoleDTO)
                 .collect(Collectors.toList());
     }
 }

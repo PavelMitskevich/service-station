@@ -4,37 +4,40 @@ import by.mitskevich.servicestation.entity.Car;
 import by.mitskevich.servicestation.dto.CarDTO;
 import by.mitskevich.servicestation.service.CarService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("/api/v1")
+@RequestMapping("/api/v1/cars")
 public class CarController {
     private final CarService carService;
 
-    @GetMapping("/cars")
+    @GetMapping
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_MANAGER')")
     public List<CarDTO> getCars() {
         return carService.getCars();
     }
 
-    @GetMapping("/cars/{id}")
+    @GetMapping("/{id}")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_MANAGER')")
     public Car getCarById(@PathVariable("id")Long id) {
         return carService.getCarById(id);
     }
 
-    @PostMapping("/cars")
+    @PostMapping
     public Car createCar(@RequestBody CarDTO carDTO) {
         return carService.createCar(carDTO);
     }
 
-    @PutMapping("/cars")
+    @PutMapping
     public Car updateCar(@RequestBody CarDTO carDTO) {
         return carService.updateCar(carDTO);
     }
 
-    @DeleteMapping("/cars/{id}")
+    @DeleteMapping("/{id}")
     public void deleteCar(@PathVariable("id")Long id) {
         carService.deleteCar(id);
     }

@@ -31,9 +31,15 @@ public class CarMapper {
                 .build();
     }
 
-    public static List<CarDTO> carsToCarsDTO(List<Car> cars) {
+    public List<CarDTO> carsToCarsDTO(List<Car> cars) {
         return cars.stream()
                 .map(CarMapper::carToCarDTO)
+                .collect(Collectors.toList());
+    }
+
+    public List<Car> carsDtoToCars(List<CarDTO> carDTOS) {
+        return carDTOS.stream()
+                .map(CarMapper::carDtoToCar)
                 .collect(Collectors.toList());
     }
 }

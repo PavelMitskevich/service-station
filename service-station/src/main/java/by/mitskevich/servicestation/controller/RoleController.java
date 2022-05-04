@@ -35,7 +35,7 @@ public class RoleController {
 
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @DeleteMapping("/{id}")
-    public void deleteRole(@PathVariable("id")Integer id) {
+    public void deleteRole(@PathVariable("id") Integer id) {
         roleService.deleteRole(id);
     }
 }
