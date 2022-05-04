@@ -12,10 +12,11 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class RoleService {
+
     private final RoleRepository repository;
 
     public List<RoleDTO> getRoles() {
-        return null;
+        return RoleMapper.rolesToRolesDTO(repository.findAll());
     }
 
     public RoleDTO createRole(RoleDTO request) {
@@ -23,6 +24,8 @@ public class RoleService {
     }
 
     public void deleteRole(Integer id) {
+        Role role = repository.getById(id);
+        repository.delete(role);
     }
 
     public RoleDTO getRoleById(Integer id) {
