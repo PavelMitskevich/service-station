@@ -22,6 +22,12 @@ public class UserController {
         return userService.getUsers();
     }
 
+    @GetMapping("/role/{role}")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_MANAGER')")
+    public List<UserDTO> getUsersByRole(@PathVariable("role")String role) {
+        return userService.getUsersByRole(role);
+    }
+
     @GetMapping("/{id}")
     @PreAuthorize("hasAnyRole('ROLE_USER', 'ROLE_ADMIN', 'ROLE_MANAGER')")
     public UserDTO getUserById(@PathVariable("id") Long id) {
