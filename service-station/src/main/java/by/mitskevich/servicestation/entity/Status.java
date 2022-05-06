@@ -8,6 +8,7 @@ import lombok.Setter;
 import javax.persistence.*;
 import java.io.Serial;
 import java.io.Serializable;
+import java.util.List;
 
 @Getter
 @Setter
@@ -26,6 +27,9 @@ public class Status implements Serializable {
 
     @Column(name = "name")
     private String name;
+
+    @OneToMany(mappedBy = "status")
+    private List<WorkOrder> workOrders;
 
     @Override
     public boolean equals(Object o) {

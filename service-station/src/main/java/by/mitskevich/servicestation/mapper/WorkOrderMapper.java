@@ -4,6 +4,9 @@ import by.mitskevich.servicestation.dto.WorkOrderDTO;
 import by.mitskevich.servicestation.entity.WorkOrder;
 import lombok.experimental.UtilityClass;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @UtilityClass
 public class WorkOrderMapper {
     public WorkOrder workOrderDtoToWorkOrder(WorkOrderDTO workOrderDTO) {
@@ -28,5 +31,11 @@ public class WorkOrderMapper {
                 .workPrices(workOrder.getWorkPrices())
                 .sparePartPrices(workOrder.getSparePartPrices())
                 .build();
+    }
+
+    public List<WorkOrderDTO> workOrdersToWorkOrdersDTO(List<WorkOrder> workOrders) {
+        return workOrders.stream()
+                .map(WorkOrderMapper::workOrderToWorkOrderDTO)
+                .collect(Collectors.toList());
     }
 }

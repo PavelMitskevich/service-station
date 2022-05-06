@@ -5,6 +5,7 @@ import lombok.*;
 import javax.persistence.*;
 import java.io.Serial;
 import java.io.Serializable;
+import java.util.List;
 import java.util.Objects;
 
 @Getter
@@ -31,6 +32,9 @@ public class Worker implements Serializable {
 
     @Column(name = "last_name")
     private String lastName;
+
+    @OneToMany(mappedBy = "worker")
+    List<WorkOrder> workOrders;
 
     @Override
     public boolean equals(Object o) {

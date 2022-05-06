@@ -5,6 +5,7 @@ import lombok.*;
 import javax.persistence.*;
 import java.io.Serial;
 import java.io.Serializable;
+import java.util.List;
 import java.util.Objects;
 
 @Getter
@@ -38,6 +39,9 @@ public class Car implements Serializable {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id")
     private User user;
+
+    @OneToMany(mappedBy = "car", cascade = CascadeType.ALL)
+    private List<WorkOrder> workOrders;
 
     @Override
     public boolean equals(Object o) {
