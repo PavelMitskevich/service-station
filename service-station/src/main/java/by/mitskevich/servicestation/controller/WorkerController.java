@@ -35,7 +35,7 @@ public class WorkerController {
 
     @DeleteMapping("/{id}")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
-    public void deleteWorkerById(Integer id) {
+    public void deleteWorkerById(@PathVariable("id") Integer id) {
         workerService.deleteWorkerById(id);
     }
 }

@@ -7,7 +7,6 @@ import by.mitskevich.servicestation.repository.WorkerRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import javax.persistence.EntityNotFoundException;
 import java.util.List;
 
 @Service
@@ -26,9 +25,8 @@ public class WorkerService {
     }
 
     public WorkerDTO updateWorker(Integer id, WorkerDTO workerDTO) {
-        int workerId = repository.findById(id).orElseThrow(EntityNotFoundException::new).getId();
         Worker worker = WorkerMapper.workerDtoToWorker(workerDTO);
-        worker.setId(workerId);
+        worker.setId(id);
         return WorkerMapper.workerToWorkerDTO(repository.save(worker));
     }
 

@@ -20,6 +20,7 @@ public class WorkerMapper {
 
     public WorkerDTO workerToWorkerDTO(Worker worker) {
         return WorkerDTO.builder()
+                .id(worker.getId())
                 .position(worker.getPosition())
                 .firstName(worker.getFirstName())
                 .lastName(worker.getLastName())
