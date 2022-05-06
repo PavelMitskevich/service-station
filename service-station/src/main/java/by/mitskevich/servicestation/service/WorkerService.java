@@ -28,7 +28,7 @@ public class WorkerService {
     public WorkerDTO updateWorker(Integer id, WorkerDTO workerDTO) {
         int workerId = repository.findById(id).orElseThrow(EntityNotFoundException::new).getId();
         Worker worker = WorkerMapper.workerDtoToWorker(workerDTO);
-        worker.setId(id);
+        worker.setId(workerId);
         return WorkerMapper.workerToWorkerDTO(repository.save(worker));
     }
 
