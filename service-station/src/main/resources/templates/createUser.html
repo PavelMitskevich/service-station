@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Create User</title>
+<!--    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">-->
+</head>
+<body>
+<h1>Create a Person:</h1>
+
+<form th:action="@{/register}"
+      th:object="${createUserDTO}" method="POST">
+    First Name:
+    <input type="text" th:field="*{firstName}"/>
+    <br/>
+    Last Name:
+    <input type="text" th:field="*{lastName}"/>
+    <br/>
+    Login:
+    <input type="text" th:field="*{login}"/>
+    <br/>
+    Password:
+    <input type="text" th:field="*{password}"/>
+    <br/>
+    Email:
+    <input type="text" th:field="*{email}"/>
+    <br/>
+    Phone Number:
+    <input type="text" th:field="*{phoneNumber}"/>
+    <br/>
+    <input type="submit" value="Create"/>
+</form>
+
+<br/>
+
+<!-- Check if errorMessage is not null and not empty -->
+
+<!--<div th:if="${errorMessage}" th:utext="${errorMessage}"-->
+<!--     style="color:red;font-style:italic;">-->
+<!--    ...-->
+<!--</div>-->
+
+</body>
+</html>

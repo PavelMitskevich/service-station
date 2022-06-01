@@ -5,38 +5,52 @@ import by.mitskevich.servicestation.dto.UserDTO;
 import by.mitskevich.servicestation.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RequiredArgsConstructor
-@RestController
-@RequestMapping("/api/v1/users")
+//@RestController
+@Controller
+//@RequestMapping("/api/v1/users")
 public class UserController {
 
     private final UserService userService;
 
-    @GetMapping
-    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_MANAGER')")
-    public List<UserDTO> getUsers() {
-        return userService.getUsers();
+    @GetMapping("/user")
+//    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_MANAGER')")
+    public String getUsers(Model model) {
+
+        List<UserDTO> userDTOS = userService.getUsers();
+        model.addAttribute("users", userDTOS);
+        return "user";
     }
 
     @GetMapping("/role/{role}")
-    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_MANAGER')")
-    public List<UserDTO> getUsersByRole(@PathVariable("role")String role) {
+//    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_MANAGER')")
+    public List<UserDTO> getUsersByRole(@PathVariable("role") String role) {
         return userService.getUsersByRole(role);
     }
 
     @GetMapping("/{id}")
-    @PreAuthorize("hasAnyRole('ROLE_USER', 'ROLE_ADMIN', 'ROLE_MANAGER')")
+//    @PreAuthorize("hasAnyRole('ROLE_USER', 'ROLE_ADMIN', 'ROLE_MANAGER')")
     public UserDTO getUserById(@PathVariable("id") Long id) {
         return userService.getUserById(id);
     }
 
+    @GetMapping("/createUser")
+    public String showSignUpForm(CreateUserDTO createUserDTO) {
+        return "createUser";
+    }
+
     @PostMapping("/register")
-    public UserDTO createUser(@RequestBody CreateUserDTO createUserDTO) {
-        return userService.createUser(createUserDTO);
+    public String createUser(Model model,
+                             @ModelAttribute("createUserDTO") CreateUserDTO createUserDTO) {
+        userService.createUser(createUserDTO);
+        model.addAttribute("user", createUserDTO);
+        return "redirect:/user";
     }
 
     @PutMapping("/{id}")

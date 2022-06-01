@@ -32,12 +32,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/","/auth","/api/v1/users/register")
-                .permitAll()
-                .anyRequest()
-                .authenticated()
-                .and()
-                .httpBasic();
+//                .antMatchers("/","/auth","/api/v1/users/register","/demo","/user")
+                .antMatchers("*")
+                .permitAll();
+//                .anyRequest()
+//                .authenticated()
+//                .and();
+//                .httpBasic();
     }
 
     @Bean
