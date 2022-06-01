@@ -6,9 +6,14 @@
     <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
 </head>
 <body>
-    <h1>User list</h1>
-    <a th:href="@{/createUser}">Create User</a>
+    <h1>User info</h1>
     <br/><br/>
+
+    <div th:each="user : ${users}">
+        <a th:href="@{/user/{id}(id = ${user.id})}">
+        </a>
+    </div>
+
     <div>
         <table border="1">
             <tr>
@@ -17,14 +22,17 @@
                 <th>Login</th>
                 <th>Email</th>
                 <th>Phone number</th>
+                <th>Car</th>
             </tr>
-            <tr th:each="user : ${users}">
+
                 <td th:utext="${user.firstName}">...</td>
                 <td th:utext="${user.lastName}">...</td>
                 <td th:utext="${user.login}">...</td>
                 <td th:utext="${user.email}">...</td>
                 <td th:utext="${user.phoneNumber}">...</td>
-            </tr>
+                <td th:utext="${user.cars}">...</td>
+
+
         </table>
     </div>
 

@@ -2,6 +2,7 @@ package by.mitskevich.servicestation.mapper;
 
 import by.mitskevich.servicestation.dto.CreateUserDTO;
 import by.mitskevich.servicestation.dto.UserDTO;
+import by.mitskevich.servicestation.entity.Car;
 import by.mitskevich.servicestation.entity.User;
 import lombok.experimental.UtilityClass;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -43,6 +44,12 @@ public class UserMapper {
                 .email(user.getEmail())
                 .phoneNumber(user.getPhoneNumber())
                 .role(RoleMapper.roleToRoleDTO(user.getRole()))
+                .cars(user.getCars().stream()
+                        .map(car -> Car.builder().brand(car.getBrand())
+                                .model(car.getModel())
+                                .vin(car.getVin())
+                                .year(car.getYear()).build())
+                        .toList())
                 .build();
     }
 
@@ -54,7 +61,7 @@ public class UserMapper {
     }
 
     public List<UserDTO> usersToUsersDTO(List<User> users) {
-        return  users
+        return users
                 .stream()
                 .map(UserMapper::userToUserDTO)
                 .collect(Collectors.toList());

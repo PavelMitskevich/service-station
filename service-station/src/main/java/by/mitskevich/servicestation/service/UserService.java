@@ -32,6 +32,10 @@ public class UserService {
         return UserMapper.userToUserDTO(repository.findById(id).orElseThrow(EntityNotFoundException::new));
     }
 
+    public UserDTO getUserByUsername(String username) {
+        return UserMapper.userToUserDTO(repository.findByLogin(username).orElseThrow(EntityNotFoundException::new));
+    }
+
     public List<UserDTO> getUsersByRole(String inputRole) {
         Role role = roleRepository.findByName(inputRole.toUpperCase()).orElseThrow(EntityNotFoundException::new);
         return UserMapper.usersToUsersDTO(role.getUsers());

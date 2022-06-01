@@ -20,7 +20,7 @@ public class UserController {
     private final UserService userService;
 
     @GetMapping("/user")
-//    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_MANAGER')")
+//    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_MANAGER','ROLE_USER')")
     public String getUsers(Model model) {
 
         List<UserDTO> userDTOS = userService.getUsers();
@@ -28,16 +28,21 @@ public class UserController {
         return "user";
     }
 
+//    @GetMapping("/user")
+//    public String g
+
     @GetMapping("/role/{role}")
 //    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_MANAGER')")
     public List<UserDTO> getUsersByRole(@PathVariable("role") String role) {
         return userService.getUsersByRole(role);
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/user/{id}")
 //    @PreAuthorize("hasAnyRole('ROLE_USER', 'ROLE_ADMIN', 'ROLE_MANAGER')")
-    public UserDTO getUserById(@PathVariable("id") Long id) {
-        return userService.getUserById(id);
+    public String getUserById(@PathVariable("id") Long id, Model model) {
+//        userService.getUserById(id);
+        model.addAttribute("user", userService.getUserById(id));
+        return "user";
     }
 
     @GetMapping("/createUser")
