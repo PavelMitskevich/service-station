@@ -28,15 +28,6 @@ public class UserController {
         return "user";
     }
 
-//    @GetMapping("/user")
-//    public String g
-
-    @GetMapping("/role/{role}")
-//    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_MANAGER')")
-    public List<UserDTO> getUsersByRole(@PathVariable("role") String role) {
-        return userService.getUsersByRole(role);
-    }
-
     @GetMapping("/user/{id}")
 //    @PreAuthorize("hasAnyRole('ROLE_USER', 'ROLE_ADMIN', 'ROLE_MANAGER')")
     public String getUserById(@PathVariable("id") Long id, Model model) {
@@ -55,17 +46,17 @@ public class UserController {
                              @ModelAttribute("createUserDTO") CreateUserDTO createUserDTO) {
         userService.createUser(createUserDTO);
         model.addAttribute("user", createUserDTO);
-        return "redirect:/user";
+        return "redirect:/loginForm";
     }
 
-    @PutMapping("/{id}")
-    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_MANAGER')")
+    @PutMapping("/user/{id}")
+//    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_MANAGER')")
     public UserDTO updateUser(@PathVariable("id") Long id, @RequestBody CreateUserDTO createUserDTO) {
         return userService.updateUser(id, createUserDTO);
     }
 
-    @DeleteMapping("/{id}")
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @DeleteMapping("/user/{id}")
+//    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public void deleteUser(@PathVariable("id") Long id) {
         userService.deleteUser(id);
     }

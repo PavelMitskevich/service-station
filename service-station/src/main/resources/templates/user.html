@@ -6,35 +6,36 @@
     <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
 </head>
 <body>
-    <h1>User info</h1>
-    <br/><br/>
+<h1>User info</h1>
+<br/><br/>
 
-    <div th:each="user : ${users}">
-        <a th:href="@{/user/{id}(id = ${user.id})}">
-        </a>
-    </div>
+<div th:each="user : ${users}">
+    <a th:href="@{/user/{id}(id = ${user.id})}">
+    </a>
+</div>
 
-    <div>
-        <table border="1">
-            <tr>
-                <th>First name</th>
-                <th>Last name</th>
-                <th>Login</th>
-                <th>Email</th>
-                <th>Phone number</th>
-                <th>Car</th>
-            </tr>
+<div>
+    <table border="1">
+        <tr>
+            <th>First name</th>
+            <th>Last name</th>
+            <th>Login</th>
+            <th>Email</th>
+            <th>Phone number</th>
+        </tr>
 
-                <td th:utext="${user.firstName}">...</td>
-                <td th:utext="${user.lastName}">...</td>
-                <td th:utext="${user.login}">...</td>
-                <td th:utext="${user.email}">...</td>
-                <td th:utext="${user.phoneNumber}">...</td>
-                <td th:utext="${user.cars}">...</td>
+        <td th:utext="${user.firstName}">...</td>
+        <td th:utext="${user.lastName}">...</td>
+        <td th:utext="${user.login}">...</td>
+        <td th:utext="${user.email}">...</td>
+        <td th:utext="${user.phoneNumber}">...</td>
 
-
-        </table>
-    </div>
+    </table>
+    <br/>
+    <a th:href="@{/user/{id}/cars(id = ${user.id})}">My cars</a>
+    <br/>
+    <a th:href="@{/workOrder}">My work orders</a>
+</div>
 
 </body>
 </html>

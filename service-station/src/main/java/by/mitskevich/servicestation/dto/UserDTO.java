@@ -31,5 +31,5 @@ public class UserDTO {
 
     private RoleDTO role;
 
-    private List<Car> cars;
+    private List<CarDTO> cars;
 }

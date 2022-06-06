@@ -29,9 +29,13 @@ public class CarService {
         return CarMapper.carToCarDTO(repository.findById(id).orElseThrow(EntityNotFoundException::new));
     }
 
+    public List<CarDTO> getCarByUserId(Long id) {
+        return CarMapper.carsToCarsDTO((repository.findCarsByUserId(id)));
+    }
+
     public CarDTO createCar(CarDTO carDTO) {
         Car car = CarMapper.carDtoToCar(carDTO);
-        User user = userRepository.findByFirstNameAndLastName(carDTO.getUser().getFirstName(), carDTO.getUser().getLastName())
+        User user = userRepository.findByLogin(carDTO.getUser().getLogin())
                 .orElseThrow(EntityNotFoundException::new);
         car.setUser(user);
         return CarMapper.carToCarDTO(repository.save(car));

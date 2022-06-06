@@ -11,7 +11,7 @@ import java.util.stream.Collectors;
 public class WorkOrderMapper {
     public WorkOrder workOrderDtoToWorkOrder(WorkOrderDTO workOrderDTO) {
         return WorkOrder.builder()
-                .car(workOrderDTO.getCar())
+//                .car(workOrderDTO.getCar())
                 .startTime(workOrderDTO.getStartTime())
                 .endTime(workOrderDTO.getEndTime())
                 .status(workOrderDTO.getStatus())
@@ -23,7 +23,7 @@ public class WorkOrderMapper {
 
     public WorkOrderDTO workOrderToWorkOrderDTO(WorkOrder workOrder) {
         return WorkOrderDTO.builder()
-                .car(workOrder.getCar())
+//                .car(workOrder.getCar())
                 .startTime(workOrder.getStartTime())
                 .endTime(workOrder.getEndTime())
                 .status(workOrder.getStatus())
@@ -36,6 +36,12 @@ public class WorkOrderMapper {
     public List<WorkOrderDTO> workOrdersToWorkOrdersDTO(List<WorkOrder> workOrders) {
         return workOrders.stream()
                 .map(WorkOrderMapper::workOrderToWorkOrderDTO)
+                .collect(Collectors.toList());
+    }
+
+    public List<WorkOrder> workOrderDTOSToWorkOrders(List<WorkOrderDTO> workOrderDTOS) {
+        return workOrderDTOS.stream()
+                .map(WorkOrderMapper::workOrderDtoToWorkOrder)
                 .collect(Collectors.toList());
     }
 }

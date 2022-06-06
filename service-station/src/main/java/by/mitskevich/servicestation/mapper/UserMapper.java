@@ -1,5 +1,6 @@
 package by.mitskevich.servicestation.mapper;
 
+import by.mitskevich.servicestation.dto.CarDTO;
 import by.mitskevich.servicestation.dto.CreateUserDTO;
 import by.mitskevich.servicestation.dto.UserDTO;
 import by.mitskevich.servicestation.entity.Car;
@@ -21,6 +22,14 @@ public class UserMapper {
                 .password(createUserDTO.getPassword())
                 .email(createUserDTO.getEmail())
                 .phoneNumber(createUserDTO.getPhoneNumber())
+//                .cars(CarMapper.carsDtoToCars(createUserDTO.getCars().stream()
+//                                .map(carDTO -> CarDTO.builder()
+//                                        .brand(carDTO.getBrand())
+//                                        .model(carDTO.getModel())
+//                                        .vin(carDTO.getVin())
+//                                        .year(carDTO.getYear())
+//                                        .workOrders(carDTO.getWorkOrders()).build())
+//                        .toList()))
                 .build();
     }
 
@@ -44,12 +53,13 @@ public class UserMapper {
                 .email(user.getEmail())
                 .phoneNumber(user.getPhoneNumber())
                 .role(RoleMapper.roleToRoleDTO(user.getRole()))
-                .cars(user.getCars().stream()
-                        .map(car -> Car.builder().brand(car.getBrand())
-                                .model(car.getModel())
-                                .vin(car.getVin())
-                                .year(car.getYear()).build())
-                        .toList())
+//                .cars(CarMapper.carsToCarsDTO(user.getCars().stream()
+//                        .map(car -> Car.builder().brand(car.getBrand())
+//                                .model(car.getModel())
+//                                .vin(car.getVin())
+//                                .year(car.getYear())
+//                                .workOrders(car.getWorkOrders()).build())
+//                        .toList()))
                 .build();
     }
 
