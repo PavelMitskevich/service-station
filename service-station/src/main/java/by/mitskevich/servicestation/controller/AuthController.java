@@ -2,9 +2,7 @@ package by.mitskevich.servicestation.controller;
 
 import by.mitskevich.servicestation.dto.UserDTO;
 import by.mitskevich.servicestation.exception.CustomException;
-import by.mitskevich.servicestation.mapper.UserMapper;
 import by.mitskevich.servicestation.payload.AuthRequest;
-import by.mitskevich.servicestation.repository.UserRepository;
 import by.mitskevich.servicestation.service.CustomUserDetailsService;
 import by.mitskevich.servicestation.service.UserService;
 import lombok.RequiredArgsConstructor;

@@ -1,14 +1,9 @@
 package by.mitskevich.servicestation.controller;
 
 import by.mitskevich.servicestation.dto.CarDTO;
-import by.mitskevich.servicestation.dto.CreateUserDTO;
-import by.mitskevich.servicestation.entity.Car;
-import by.mitskevich.servicestation.entity.User;
-import by.mitskevich.servicestation.mapper.UserMapper;
 import by.mitskevich.servicestation.service.CarService;
 import by.mitskevich.servicestation.service.UserService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
