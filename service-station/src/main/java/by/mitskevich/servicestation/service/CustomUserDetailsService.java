@@ -2,7 +2,7 @@ package by.mitskevich.servicestation.service;
 
 import by.mitskevich.servicestation.entity.User;
 import by.mitskevich.servicestation.exception.CustomException;
-import by.mitskevich.servicestation.mapper.UserMapper;
+import by.mitskevich.servicestation.mapper.UserDetailsMapper;
 import by.mitskevich.servicestation.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
@@ -22,6 +22,6 @@ public class CustomUserDetailsService implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) {
         User user = repository.findByLogin(username)
                 .orElseThrow(() -> new CustomException("User with login: " + username + " was not found"));
-        return UserMapper.mapUserToCustomUser(user);
+        return UserDetailsMapper.mapToCustomUser(user);
     }
 }

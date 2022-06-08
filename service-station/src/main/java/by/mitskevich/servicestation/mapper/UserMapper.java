@@ -1,15 +1,9 @@
 package by.mitskevich.servicestation.mapper;
 
-import by.mitskevich.servicestation.dto.CarDTO;
 import by.mitskevich.servicestation.dto.CreateUserDTO;
 import by.mitskevich.servicestation.dto.UserDTO;
-import by.mitskevich.servicestation.entity.Car;
 import by.mitskevich.servicestation.entity.User;
 import lombok.experimental.UtilityClass;
-import org.springframework.security.core.userdetails.UserDetails;
-
-import java.util.List;
-import java.util.stream.Collectors;
 
 @UtilityClass
 public class UserMapper {
@@ -33,7 +27,7 @@ public class UserMapper {
                 .build();
     }
 
-    public User userDtoToUser(UserDTO userDTO) {
+    public User mapToEntity(UserDTO userDTO) {
         return User.builder()
                 .id(userDTO.getId())
                 .firstName(userDTO.getFirstName())
@@ -44,7 +38,7 @@ public class UserMapper {
                 .build();
     }
 
-    public UserDTO userToUserDTO(User user) {
+    public UserDTO mapToDto(User user) {
         return UserDTO.builder()
                 .id(user.getId())
                 .firstName(user.getFirstName())
@@ -52,7 +46,7 @@ public class UserMapper {
                 .login(user.getLogin())
                 .email(user.getEmail())
                 .phoneNumber(user.getPhoneNumber())
-                .role(RoleMapper.roleToRoleDTO(user.getRole()))
+                .role(RoleMapper.mapToDto(user.getRole()))
 //                .cars(CarMapper.carsToCarsDTO(user.getCars().stream()
 //                        .map(car -> Car.builder().brand(car.getBrand())
 //                                .model(car.getModel())
@@ -60,28 +54,6 @@ public class UserMapper {
 //                                .year(car.getYear())
 //                                .workOrders(car.getWorkOrders()).build())
 //                        .toList()))
-                .build();
-    }
-
-    public List<User> usersDtoToUsers(List<UserDTO> userDTOS) {
-        return userDTOS
-                .stream()
-                .map(UserMapper::userDtoToUser)
-                .collect(Collectors.toList());
-    }
-
-    public List<UserDTO> usersToUsersDTO(List<User> users) {
-        return users
-                .stream()
-                .map(UserMapper::userToUserDTO)
-                .collect(Collectors.toList());
-    }
-
-    public UserDetails mapUserToCustomUser(User user) {
-        return org.springframework.security.core.userdetails.User.builder()
-                .username(user.getLogin())
-                .password(user.getPassword())
-                .roles(user.getRole().getName())
                 .build();
     }
 }

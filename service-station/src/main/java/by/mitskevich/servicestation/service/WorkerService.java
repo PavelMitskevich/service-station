@@ -8,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -17,17 +18,23 @@ public class WorkerService {
 
 
     public List<WorkerDTO> getWorkers() {
-        return WorkerMapper.workersToWorkersDTO(repository.findAll());
+        List<Worker> workers = repository.findAll();
+        return workers.stream()
+                .map(WorkerMapper::mapToDto)
+                .collect(Collectors.toList());
     }
 
     public WorkerDTO createWorker(WorkerDTO workerDTO) {
-        return WorkerMapper.workerToWorkerDTO(repository.save(WorkerMapper.workerDtoToWorker(workerDTO)));
+        Worker worker = WorkerMapper.mapToEntity(workerDTO);
+        worker = repository.save(worker);
+        return WorkerMapper.mapToDto(worker);
     }
 
     public WorkerDTO updateWorker(Integer id, WorkerDTO workerDTO) {
-        Worker worker = WorkerMapper.workerDtoToWorker(workerDTO);
+        Worker worker = WorkerMapper.mapToEntity(workerDTO);
         worker.setId(id);
-        return WorkerMapper.workerToWorkerDTO(repository.save(worker));
+        worker = repository.save(worker);
+        return WorkerMapper.mapToDto(worker);
     }
 
     public void deleteWorkerById(Integer id) {

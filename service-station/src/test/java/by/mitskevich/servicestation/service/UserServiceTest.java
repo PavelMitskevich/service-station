@@ -51,7 +51,7 @@ class UserServiceTest {
                 .login("M.Brown")
                 .email("m.b@gmail.com")
                 .phoneNumber(297889955)
-                .role(RoleMapper.roleToRoleDTO(role))
+                .role(RoleMapper.mapToDto(role))
                 .build();
     }
 
@@ -80,15 +80,15 @@ class UserServiceTest {
                 .password("brown")
                 .email("m.b@gmail.com")
                 .phoneNumber(297889955)
-                .role(RoleMapper.roleToRoleDTO(role))
+                .role(RoleMapper.mapToDto(role))
                 .build();
-        User user = UserMapper.userDtoToUser(createUserDTO);
+        User user = UserMapper.mapToEntity(createUserDTO);
 
         user.setPassword(passwordEncoder.encode(createUserDTO.getPassword()));
         user.setRole(roleRepository.findByName("USER").orElseThrow(EntityNotFoundException::new));
 
         userRepository.save(user);
-        UserDTO actualUser = UserMapper.userToUserDTO(user);
+        UserDTO actualUser = UserMapper.mapToDto(user);
         Assertions.assertEquals(expectedUser.getFirstName(), actualUser.getFirstName());
     }
 

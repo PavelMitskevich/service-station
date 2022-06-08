@@ -7,7 +7,7 @@ import lombok.experimental.UtilityClass;
 @UtilityClass
 public class WorkPriceMapper {
 
-    public WorkPrice workPriceDtoToWorkPrice(WorkPriceDTO workPriceDTO) {
+    public WorkPrice mapToEntity(WorkPriceDTO workPriceDTO) {
         return WorkPrice.builder()
                 .name(workPriceDTO.getName())
                 .price(workPriceDTO.getPrice())
@@ -17,7 +17,7 @@ public class WorkPriceMapper {
                 .build();
     }
 
-    public WorkPriceDTO workPriceToWorkPriceDTO(WorkPrice workPrice) {
+    public WorkPriceDTO mapToDto(WorkPrice workPrice) {
         return WorkPriceDTO.builder()
                 .name(workPrice.getName())
                 .price(workPrice.getPrice())

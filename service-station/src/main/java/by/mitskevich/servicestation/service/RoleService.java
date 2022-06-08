@@ -8,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -16,11 +17,16 @@ public class RoleService {
     private final RoleRepository repository;
 
     public List<RoleDTO> getRoles() {
-        return RoleMapper.rolesToRolesDTO(repository.findAll());
+        List<Role> roles = repository.findAll();
+        return roles.stream()
+                .map(RoleMapper::mapToDto)
+                .collect(Collectors.toList());
     }
 
     public RoleDTO createRole(RoleDTO request) {
-        return RoleMapper.roleToRoleDTO(repository.save(RoleMapper.roleDtoToRole(request)));
+        Role role = RoleMapper.mapToEntity(request);
+        role = repository.save(role);
+        return RoleMapper.mapToDto(role);
     }
 
     public void deleteRole(Integer id) {
@@ -29,6 +35,7 @@ public class RoleService {
     }
 
     public RoleDTO getRoleById(Integer id) {
-        return RoleMapper.roleToRoleDTO(repository.getById(id));
+        Role role = repository.getById(id);
+        return RoleMapper.mapToDto(role);
     }
 }

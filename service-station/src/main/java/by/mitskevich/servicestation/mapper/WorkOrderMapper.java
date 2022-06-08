@@ -4,12 +4,10 @@ import by.mitskevich.servicestation.dto.WorkOrderDTO;
 import by.mitskevich.servicestation.entity.WorkOrder;
 import lombok.experimental.UtilityClass;
 
-import java.util.List;
-import java.util.stream.Collectors;
-
 @UtilityClass
 public class WorkOrderMapper {
-    public WorkOrder workOrderDtoToWorkOrder(WorkOrderDTO workOrderDTO) {
+
+    public WorkOrder mapToEntity(WorkOrderDTO workOrderDTO) {
         return WorkOrder.builder()
 //                .car(workOrderDTO.getCar())
                 .startTime(workOrderDTO.getStartTime())
@@ -21,7 +19,7 @@ public class WorkOrderMapper {
                 .build();
     }
 
-    public WorkOrderDTO workOrderToWorkOrderDTO(WorkOrder workOrder) {
+    public WorkOrderDTO mapToDto(WorkOrder workOrder) {
         return WorkOrderDTO.builder()
 //                .car(workOrder.getCar())
                 .startTime(workOrder.getStartTime())
@@ -31,17 +29,5 @@ public class WorkOrderMapper {
                 .workPrices(workOrder.getWorkPrices())
                 .sparePartPrices(workOrder.getSparePartPrices())
                 .build();
-    }
-
-    public List<WorkOrderDTO> workOrdersToWorkOrdersDTO(List<WorkOrder> workOrders) {
-        return workOrders.stream()
-                .map(WorkOrderMapper::workOrderToWorkOrderDTO)
-                .collect(Collectors.toList());
-    }
-
-    public List<WorkOrder> workOrderDTOSToWorkOrders(List<WorkOrderDTO> workOrderDTOS) {
-        return workOrderDTOS.stream()
-                .map(WorkOrderMapper::workOrderDtoToWorkOrder)
-                .collect(Collectors.toList());
     }
 }

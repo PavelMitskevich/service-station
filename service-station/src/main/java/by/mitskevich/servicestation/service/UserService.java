@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -25,32 +26,41 @@ public class UserService {
     private final PasswordEncoder passwordEncoder;
 
     public List<UserDTO> getUsers() {
-        return UserMapper.usersToUsersDTO(repository.findAll());
+        List<User> users = repository.findAll();
+        return users.stream()
+                .map(UserMapper::mapToDto)
+                .collect(Collectors.toList());
     }
 
     public UserDTO getUserById(Long id) {
-        return UserMapper.userToUserDTO(repository.findById(id).orElseThrow(EntityNotFoundException::new));
+        User user = repository.findById(id).orElseThrow(EntityNotFoundException::new);
+        return UserMapper.mapToDto(user);
     }
 
     public UserDTO getUserByUsername(String username) {
-        return UserMapper.userToUserDTO(repository.findByLogin(username).orElseThrow(EntityNotFoundException::new));
+        User user = repository.findByLogin(username).orElseThrow(EntityNotFoundException::new);
+        return UserMapper.mapToDto(user);
     }
 
     public List<UserDTO> getUsersByRole(String inputRole) {
         Role role = roleRepository.findByName(inputRole.toUpperCase()).orElseThrow(EntityNotFoundException::new);
-        return UserMapper.usersToUsersDTO(role.getUsers());
+        List<User> users = role.getUsers();
+        return users.stream()
+                .map(UserMapper::mapToDto)
+                .collect(Collectors.toList());
     }
 
     public UserDTO createUser(CreateUserDTO createUserDTO) {
 
-        User user = UserMapper.userDtoToUser(createUserDTO);
+        User user = UserMapper.mapToEntity(createUserDTO);
         user.setPassword(passwordEncoder.encode(createUserDTO.getPassword()));
 
         if (user.getRole() == null) {
             user.setRole(roleRepository.findByName("USER").orElseThrow(EntityNotFoundException::new));
         }
 
-        return UserMapper.userToUserDTO(repository.save(user));
+        user = repository.save(user);
+        return UserMapper.mapToDto(user);
     }
 
     public UserDTO updateUser(Long id, CreateUserDTO createUserDTO) {
@@ -63,7 +73,8 @@ public class UserService {
         user.setPassword(passwordEncoder.encode(createUserDTO.getPassword()));
         user.setRole(role);
 
-        return UserMapper.userToUserDTO(repository.save(user));
+        user = repository.save(user);
+        return UserMapper.mapToDto(user);
     }
 
     public void deleteUser(Long id) {

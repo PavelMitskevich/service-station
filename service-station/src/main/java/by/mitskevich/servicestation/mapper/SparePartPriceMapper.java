@@ -7,7 +7,7 @@ import lombok.experimental.UtilityClass;
 @UtilityClass
 public class SparePartPriceMapper {
 
-    public SparePartPrice sparePartPriceDtoToSparePartPrice(SparePartPriceDTO sparePartPriceDTO) {
+    public SparePartPrice mapToEntity(SparePartPriceDTO sparePartPriceDTO) {
         return SparePartPrice.builder()
                 .brand(sparePartPriceDTO.getBrand())
                 .vendorCode(sparePartPriceDTO.getVendorCode())
@@ -18,7 +18,7 @@ public class SparePartPriceMapper {
                 .build();
     }
 
-    public SparePartPriceDTO sparePartPriceToSparePartPriceDTO(SparePartPrice sparePartPrice) {
+    public SparePartPriceDTO mapToDto(SparePartPrice sparePartPrice) {
         return SparePartPriceDTO.builder()
                 .brand(sparePartPrice.getBrand())
                 .vendorCode(sparePartPrice.getVendorCode())

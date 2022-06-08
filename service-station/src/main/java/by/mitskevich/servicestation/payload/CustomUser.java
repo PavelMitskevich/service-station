@@ -16,19 +16,9 @@ import java.util.List;
 @AllArgsConstructor
 public class CustomUser implements UserDetails {
 
-//    private String firstName;
-//
-//    private String lastName;
-
     private String username;
 
     private String password;
-
-//    private String email;
-//
-//    private int phoneNumber;
-//
-//    private Role role;
 
     private List<GrantedAuthority> grantedAuthorities;
 
