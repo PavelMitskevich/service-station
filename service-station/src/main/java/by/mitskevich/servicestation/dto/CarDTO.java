@@ -1,6 +1,5 @@
 package by.mitskevich.servicestation.dto;
 
-import by.mitskevich.servicestation.entity.WorkOrder;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

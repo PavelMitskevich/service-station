@@ -1,9 +1,7 @@
 package by.mitskevich.servicestation.dto;
 
-import by.mitskevich.servicestation.entity.Car;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
