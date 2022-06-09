@@ -37,7 +37,7 @@ public class UserController {
 
     @GetMapping("/createUser")
     public String showSignUpForm(CreateUserDTO createUserDTO) {
-        return "createUser";
+        return "pages/createUser";
     }
 
     @PostMapping("/register")

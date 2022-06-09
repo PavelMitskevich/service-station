@@ -1,9 +1,3 @@
-div.container{
-    padding:auto;
-    margin:auto;
-    text-indent:20%;
-}
-
-div.col{
-    text-indent: 50%;
+body{
+    background-image: url(img/banner.jpg);
 }

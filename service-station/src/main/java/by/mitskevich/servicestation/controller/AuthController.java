@@ -23,7 +23,7 @@ public class AuthController {
 
     @GetMapping("/loginForm")
     public String showSignUpForm(AuthRequest authRequest) {
-        return "loginForm";
+        return "pages/loginForm";
     }
 
     @PostMapping("/auth")
