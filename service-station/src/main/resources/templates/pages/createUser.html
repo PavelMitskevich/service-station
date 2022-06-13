@@ -3,42 +3,127 @@
 <head>
     <meta charset="UTF-8">
     <title>Create User</title>
-    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <link rel="stylesheet" href="css\main.css">
 </head>
 <body>
-<h1>Create a Person:</h1>
 
-<form th:action="@{/register}"
-      th:object="${createUserDTO}" method="POST">
-    First Name:
-    <input type="text" th:field="*{firstName}"/>
-    <br/>
-    Last Name:
-    <input type="text" th:field="*{lastName}"/>
-    <br/>
-    Login:
-    <input type="text" th:field="*{login}"/>
-    <br/>
-    Password:
-    <input type="text" th:field="*{password}"/>
-    <br/>
-    Email:
-    <input type="text" th:field="*{email}"/>
-    <br/>
-    Phone Number:
-    <input type="text" th:field="*{phoneNumber}"/>
-    <br/>
-    <input type="submit" value="Create"/>
-</form>
+    <!--Navigation-->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container">
+            <a class="navbar-brand" th:href="@{/}">Speed Hunters</a>
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item"><a class="nav-link active" aria-current="page" th:href="@{/loginForm}">Sign in</a></li>
+                <li class="nav-item"><a class="nav-link active" aria-current="page" th:href="@{/createUser}">Sign up</a></li>
+            </ul>
+        </div>
+    </nav>
+    <!--Navigation-->
 
-<br/>
+    <!--Main-->
+    <section>
+        <div class="container">
+            <div class="row justify-content-center">
+                <h1 class="content-box-column">Create Form:</h1>
+                <form th:action="@{/register}"
+                th:object="${createUserDTO}" method="POST">
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-lg-6 col-md-6">
+                    <div class="mb-3">
+                        <input type="text" class="form-control" id="registerFirstName" th:field="*{firstName}"/>
+                        <label class="form-label" for="registerFirstName">First Name</label>
+                    </div>
+                </div>
+                
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-lg-6 col-md-6">
+                    <div class="mb-3">
+                        <input type="text" class="form-control" id="registerLastName" th:field="*{lastName}"/>
+                        <label class="form-label" for="registerLastName">Last Name</label>
+                    </div>
+                </div>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-lg-6 col-md-6">
+                    <div class="mb-3">
+                        <input type="text" class="form-control" id="registerLogin" th:field="*{login}"/>
+                        <label class="form-label" for="registerLogin">Login</label>
+                    </div>
+                </div>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-lg-6 col-md-6">
+                    <div class="mb-3">
+                        <input type="password" class="form-control" id="registerPassword" th:field="*{password}"/>
+                        <label class="form-label" for="registerPassword">Password</label>
+                    </div>
+                </div>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-lg-6 col-md-6">
+                    <div class="mb-3">
+                        <input type="password" class="form-control" id="registerRepeatPassword" th:field="*{password}"/>
+                        <label class="form-label" for="registerPassword">Repeat password</label>
+                    </div>
+                </div>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-lg-6 col-md-6">
+                    <div class="mb-3">
+                        <input type="text" class="form-control" id="registerEmail" th:field="*{email}"/>
+                        <label class="form-label" for="registerEmail">Email</label>
+                    </div>
+                </div>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-lg-6 col-md-6">
+                    <div class="mb-3">
+                        <input type="text" class="form-control" id="registerPhoneNumber" th:field="*{phoneNumber}"/>
+                        <label class="form-label" for="registerPhoneNumber">Phone Number</label>
+                    </div>
+                </div>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-lg-6 col-md-6">
+                    <button type="submit" class="btn btn-primary" value="Create">Create</button>
+                </div>
+            </div>
+                </form>
+            </div>
+    </section>
+    <!--Main-->
 
-<!-- Check if errorMessage is not null and not empty -->
+    <!--Footer-->
+    <footer>
+        <div class="container">
+            <div class="row footer">
+                <div class="fusion-column col-lg-6 col-md-6">
+                    <div class="content-box-column">
+                        <h2 class="content-box-footer">CALL US TODAY!</h2>
+                        <nav>
+                            <div class="contact-information">
+                                <ul>
+                                    <li><a href="tel:+375291234567">Tel: +375-(29)-123-45-67</a></li>
+                                </ul>
+                            </div>
+                        </nav>
+                    </div>
+                </div>
+                <div class="fusion-column col-lg-6 col-md-6">
+                    <div class="content-box-column">
+                        <h2 class="content-box-footer">WE ARE OPEN!</h2>
+                            <div class="contact-information">
+                                    <p>Mon-Fri 8:30-17:30</p>
+                            </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!--Footer-->
 
-<!--<div th:if="${errorMessage}" th:utext="${errorMessage}"-->
-<!--     style="color:red;font-style:italic;">-->
-<!--    ...-->
-<!--</div>-->
-
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
 </body>
 </html>
