@@ -17,6 +17,10 @@ footer {
     padding-top:5px;
 }
 
+section {
+    min-height: 720px;
+}
+
 .header-text-holder {
     text-align: center;
     font: 22px sans-serif;
