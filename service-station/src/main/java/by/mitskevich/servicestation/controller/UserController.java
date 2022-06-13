@@ -13,7 +13,7 @@ import java.util.List;
 @RequiredArgsConstructor
 //@RestController
 @Controller
-//@RequestMapping("/api/v1/users")
+@RequestMapping()
 public class UserController {
 
     private final UserService userService;
@@ -24,7 +24,7 @@ public class UserController {
 
         List<UserDTO> userDTOS = userService.getUsers();
         model.addAttribute("users", userDTOS);
-        return "user";
+        return "pages/user";
     }
 
     @GetMapping("/user/{id}")
@@ -32,7 +32,7 @@ public class UserController {
     public String getUserById(@PathVariable("id") Long id, Model model) {
 //        userService.getUserById(id);
         model.addAttribute("user", userService.getUserById(id));
-        return "user";
+        return "pages/user";
     }
 
     @GetMapping("/createUser")
