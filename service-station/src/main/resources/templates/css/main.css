@@ -1,3 +1,36 @@
-body{
-    background-image: url(img/banner.jpg);
+body {
+    background-image: url(img/background.jpg);
+}
+
+header {
+    height: 180px;
+    padding-top: 25px;
+    background-image: url(img/logo-dont-3.png);
+    background-repeat: no-repeat;
+    background-position-x: center;
+}
+
+.header-text-holder {
+    text-align: center;
+    font: 22px sans-serif;
+    color: rgb(182, 173, 155);
+    text-shadow: 1px 1px black;
+}
+
+.image {
+    margin: auto;
+    width: 114px;
+    height: 132px;
+}
+
+.content-box-heading {
+    font-size: 18px;
+    line-height: 1.28;
+    font-weight: bold;
+}
+
+.content-container {
+    text-align: center;
+    color: white;
+    font-weight: 500;
 }
