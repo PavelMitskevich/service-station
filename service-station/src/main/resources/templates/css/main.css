@@ -10,6 +10,11 @@ header {
     background-position-x: center;
 }
 
+footer {
+    height: 100px;
+    
+}
+
 .header-text-holder {
     text-align: center;
     font: 22px sans-serif;
@@ -33,4 +38,23 @@ header {
     text-align: center;
     color: white;
     font-weight: 500;
+}
+
+.content-box-column {
+    margin-top: 20px;
+    text-align: center;
+    color: aliceblue;
+}
+
+.contact-information a {
+    margin-right: 8%;
+    font-size: 16px;
+    text-decoration:none;
+    color: white;
+    font-weight: bold;
+}
+
+.footer-image {
+    width: 180px;
+    height: 180px;
 }
