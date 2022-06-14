@@ -24,7 +24,7 @@ public class UserController {
 
         List<UserDTO> userDTOS = userService.getUsers();
         model.addAttribute("users", userDTOS);
-        return "pages/user";
+        return "pages/users";
     }
 
     @GetMapping("/user/{id}")
@@ -32,7 +32,7 @@ public class UserController {
     public String getUserById(@PathVariable("id") Long id, Model model) {
 //        userService.getUserById(id);
         model.addAttribute("user", userService.getUserById(id));
-        return "pages/user";
+        return "pages/users";
     }
 
     @GetMapping("/createUser")

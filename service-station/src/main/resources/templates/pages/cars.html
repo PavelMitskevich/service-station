@@ -21,30 +21,35 @@
     <!--Navigation-->
 
     <!--Main-->
+     <section>
+        <div class="container col-lg-8">
+            <h1 class="header-table">Your cars</h1>
+            <div class="user-table">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th scope="col">Brand</th>
+                            <th scope="col">Model</th>
+                            <th scope="col">VIN</th>
+                            <th scope="col">Year</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="car: ${cars}">
+                            <td th:text="${car.brand}"></td>
+                            <td th:text="${car.model}"></td>
+                            <td th:text="${car.vin}"></td>
+                            <td th:text="${car.year}"></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <a class="btn btn-warning" th:href="@{/createCar}" role="button">Create a new car</a>
+                <a class="btn btn-warning" th:href="@{/workOrders}" role="button">My work orders</a>
+            </div>
+        </div>
+     </section>
 
-<div th:each="car : ${cars}">
-    <a th:href="@{/user/{id}/cars(id = ${user.id})}">
-    </a>
-</div>
 
-<div>
-    <table border="1">
-        <tr>
-            <th>Brand</th>
-            <th>Model</th>
-            <th>VIN</th>
-            <th>Year</th>
-        </tr>
-
-        <td th:utext="${car.brand}">...</td>
-        <td th:utext="${car.model}">...</td>
-        <td th:utext="${car.vin}">...</td>
-        <td th:utext="${car.year}">...</td>
-
-    </table>
-    <br/>
-    <a th:href="@{/createCar}">Create a new car</a>
-</div>
 
 <!--Main-->
 

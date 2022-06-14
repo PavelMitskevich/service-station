@@ -13,7 +13,7 @@ public class CarMapper {
                 .brand(carDTO.getBrand())
                 .model(carDTO.getModel())
                 .year(carDTO.getYear())
-//                .user(UserMapper.userDtoToUser(carDTO.getUser()))
+                .user(UserMapper.mapToEntity(carDTO.getUser()))
 //                .workOrders(WorkOrderMapper.workOrderDTOSToWorkOrders(carDTO.getWorkOrders()))
                 .build();
     }
@@ -25,7 +25,7 @@ public class CarMapper {
                 .brand(car.getBrand())
                 .model(car.getModel())
                 .year(car.getYear())
-//                .user(UserMapper.userToUserDTO(car.getUser()))
+                .user(UserMapper.mapToDto(car.getUser()))
 //                .workOrders(WorkOrderMapper.workOrdersToWorkOrdersDTO(car.getWorkOrders()))
                 .build();
     }

@@ -13,7 +13,7 @@ import java.util.List;
 @RequiredArgsConstructor
 @Controller
 //@RestController
-//@RequestMapping("/cars")
+@RequestMapping()
 public class CarController {
 
     private final CarService carService;
@@ -34,17 +34,8 @@ public class CarController {
     @GetMapping("/user/{id}/cars")
 //    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_MANAGER')")
     public String getCarsByUser(@PathVariable("id") Long id, Model model) {
-//        User user = UserMapper.userDtoToUser(userService.getUserById(id));
-//        model.addAttribute("user", user);
-//        for (Car car : user.getCars()) {
-//            model.addAttribute("car", car);
-//        }
         List<CarDTO> cars = carService.getCarByUserId(id);
-//        for (CarDTO carDTO : cars) {
-            model.addAttribute("car", cars);
-//        }
-//        model.addAttribute("car", carService.getCarByUserId(id));
-//        carService.getCars();
+        model.addAttribute("cars", cars);
         return "pages/cars";
     }
 
@@ -67,7 +58,7 @@ public class CarController {
         carDTO = carService.createCar(carDTO);
         model.addAttribute("car", carDTO);
 
-        return "redirect:/user/" + carDTO.getUser().getId() + "/pages/cars";
+        return "redirect:/user/" + carDTO.getUser().getId() + "/cars";
     }
 
     @PutMapping("/{id}")
