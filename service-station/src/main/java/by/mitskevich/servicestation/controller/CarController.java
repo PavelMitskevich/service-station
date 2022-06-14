@@ -31,7 +31,7 @@ public class CarController {
         return "redirect:/user/{id}/cars";
     }
 
-    @GetMapping("/user/{id}/cars")
+    @GetMapping("/users/{id}/cars")
 //    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_MANAGER')")
     public String getCarsByUser(@PathVariable("id") Long id, Model model) {
         List<CarDTO> cars = carService.getCarByUserId(id);

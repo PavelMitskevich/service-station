@@ -11,15 +11,15 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RequiredArgsConstructor
-//@RestController
 @Controller
-@RequestMapping()
+//@RestController
+@RequestMapping("/users")
 public class UserController {
 
     private final UserService userService;
 
-    @GetMapping("/user")
-//    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_MANAGER','ROLE_USER')")
+    @GetMapping()
+//    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_MANAGER')")
     public String getUsers(Model model) {
 
         List<UserDTO> userDTOS = userService.getUsers();
@@ -27,11 +27,11 @@ public class UserController {
         return "pages/users";
     }
 
-    @GetMapping("/user/{id}")
+    @GetMapping("/{id}")
 //    @PreAuthorize("hasAnyRole('ROLE_USER', 'ROLE_ADMIN', 'ROLE_MANAGER')")
     public String getUserById(@PathVariable("id") Long id, Model model) {
-//        userService.getUserById(id);
-        model.addAttribute("user", userService.getUserById(id));
+        UserDTO userDTO = userService.getUserById(id);
+        model.addAttribute("user", userDTO);
         return "pages/users";
     }
 
@@ -45,16 +45,24 @@ public class UserController {
                              @ModelAttribute("createUserDTO") CreateUserDTO createUserDTO) {
         userService.createUser(createUserDTO);
         model.addAttribute("user", createUserDTO);
-        return "redirect:/loginForm";
+        return "redirect:/auth/loginForm";
     }
 
-    @PutMapping("/user/{id}")
+    @GetMapping("/{id}/updateUser")
+    public String showUpdateForm(CreateUserDTO createUserDTO) {
+        return "pages/updateUser";
+    }
+
+    @PostMapping("/{id}")
 //    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_MANAGER')")
-    public UserDTO updateUser(@PathVariable("id") Long id, @RequestBody CreateUserDTO createUserDTO) {
-        return userService.updateUser(id, createUserDTO);
+    public String updateUser(@PathVariable("id") Long id,
+                             Model model, @ModelAttribute("createUserDTO") CreateUserDTO createUserDTO) {
+        UserDTO userDTO = userService.updateUser(id, createUserDTO);
+        model.addAttribute("user", createUserDTO);
+        return "redirect:/users/" + createUserDTO.getId();
     }
 
-    @DeleteMapping("/user/{id}")
+    @DeleteMapping("/{id}")
 //    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public void deleteUser(@PathVariable("id") Long id) {
         userService.deleteUser(id);

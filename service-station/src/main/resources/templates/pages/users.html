@@ -44,8 +44,9 @@
                         </tr>
                     </tbody>
                 </table>
-                <a class="btn btn-warning" th:href="@{/user/{id}/cars(id = ${user.id})}" role="button">My cars</a>
+                <a class="btn btn-warning" th:href="@{/users/{id}/cars(id = ${user.id})}" role="button">My cars</a>
                 <a class="btn btn-warning" th:href="@{/workOrders}" role="button">My work orders</a>
+                <a class="btn btn-warning" th:href="@{/users/{id}/updateUser(id = ${user.id})}">Update my info</a>
             </div>
         </div>
     </section>

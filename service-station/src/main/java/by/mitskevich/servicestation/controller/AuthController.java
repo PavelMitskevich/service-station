@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 //@RestController
 @Controller
 @RequiredArgsConstructor
-@RequestMapping
+@RequestMapping("/auth")
 public class AuthController {
 
     private final CustomUserDetailsService userDetailsService;
@@ -26,11 +26,11 @@ public class AuthController {
         return "pages/loginForm";
     }
 
-    @PostMapping("/auth")
+    @PostMapping()
     public String login(Model model,
                         @ModelAttribute("authRequest") AuthRequest authRequest) throws CustomException {
         UserDetails userDetails = userDetailsService.loadUserByUsername(authRequest.getUsername());
         UserDTO userDTO = userService.getUserByUsername(userDetails.getUsername());
-        return "redirect:/user/" + userDTO.getId();
+        return "redirect:/users/" + userDTO.getId();
     }
 }
