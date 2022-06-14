@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title>Create a new car</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
-    <link rel="stylesheet" href="C:\Users\Иван\IdeaProjects\service-station\src\main\resources\templates\css\main.css">
+    <link rel="stylesheet" href="/css/main.css">
 </head>
 <body>
     
@@ -24,7 +24,7 @@
             <div class="row justify-content-center">
                 <h1 class="content-box-column">Create a car:</h1>
             </div>
-            <form th:action="@{/createCar}" th:object="${carDTO}" method="POST">
+            <form th:action="@{/cars/createCar}" th:object="${carDTO}" method="POST">
             <div class="row justify-content-center">
                 <div class="col-lg-6 col-md-6">
                     <div class="mb-3">

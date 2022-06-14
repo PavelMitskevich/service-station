@@ -12,7 +12,6 @@ import java.util.List;
 
 @RequiredArgsConstructor
 @Controller
-//@RestController
 @RequestMapping("/users")
 public class UserController {
 
@@ -58,8 +57,8 @@ public class UserController {
     public String updateUser(@PathVariable("id") Long id,
                              Model model, @ModelAttribute("createUserDTO") CreateUserDTO createUserDTO) {
         UserDTO userDTO = userService.updateUser(id, createUserDTO);
-        model.addAttribute("user", createUserDTO);
-        return "redirect:/users/" + createUserDTO.getId();
+        model.addAttribute("user", userDTO);
+        return "redirect:/users/" + userDTO.getId();
     }
 
     @DeleteMapping("/{id}")

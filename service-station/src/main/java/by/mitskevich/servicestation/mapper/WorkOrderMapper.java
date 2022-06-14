@@ -9,7 +9,7 @@ public class WorkOrderMapper {
 
     public WorkOrder mapToEntity(WorkOrderDTO workOrderDTO) {
         return WorkOrder.builder()
-//                .car(workOrderDTO.getCar())
+                .car(workOrderDTO.getCar())
                 .startTime(workOrderDTO.getStartTime())
                 .endTime(workOrderDTO.getEndTime())
                 .status(workOrderDTO.getStatus())
@@ -21,7 +21,7 @@ public class WorkOrderMapper {
 
     public WorkOrderDTO mapToDto(WorkOrder workOrder) {
         return WorkOrderDTO.builder()
-//                .car(workOrder.getCar())
+                .car(workOrder.getCar())
                 .startTime(workOrder.getStartTime())
                 .endTime(workOrder.getEndTime())
                 .status(workOrder.getStatus())

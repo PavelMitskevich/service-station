@@ -25,6 +25,14 @@ public class WorkOrderService {
         return null;
     }
 
+
+    public List<WorkOrderDTO> getWorkOrdersByCarId(Long id) {
+        List<WorkOrder> workOrders = repository.findWorkOrdersByCarId(id);
+        return workOrders.stream()
+                .map(WorkOrderMapper::mapToDto)
+                .collect(Collectors.toList());
+    }
+
     public List<WorkOrderDTO> getWorkOrdersByStatus(String inputStatus) {
         Status status = statusRepository.findByName(inputStatus.toUpperCase()).orElseThrow(EntityNotFoundException::new);
         List<WorkOrder> workOrders = status.getWorkOrders();

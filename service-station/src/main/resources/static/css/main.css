@@ -1,11 +1,11 @@
 body {
-    background-image: url(img/background.jpg);
+    background-image: url(../img/background.jpg);
 }
 
 header {
     height: 180px;
     padding-top: 25px;
-    background-image: url(img/logo-dont-3.png);
+    background-image: url(../img/logo-dont-3.png);
     background-repeat: no-repeat;
     background-position-x: center;
 }

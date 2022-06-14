@@ -39,18 +39,18 @@ public class CarController {
         return "pages/cars";
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/cars/{id}")
 //    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_MANAGER')")
     public CarDTO getCarById(@PathVariable("id") Long id) {
         return carService.getCarById(id);
     }
 
-    @GetMapping("/createCar")
+    @GetMapping("/cars/createCar")
     public String showCreateCar(CarDTO carDTO) {
         return "pages/createCar";
     }
 
-    @PostMapping("/createCar")
+    @PostMapping("/cars/createCar")
 //    @PreAuthorize("hasAnyRole('ROLE_USER', 'ROLE_ADMIN', 'ROLE_MANAGER')")
     public String createCar(Model model,
                             @ModelAttribute("carDTO") CarDTO carDTO) {
@@ -58,16 +58,16 @@ public class CarController {
         carDTO = carService.createCar(carDTO);
         model.addAttribute("car", carDTO);
 
-        return "redirect:/user/" + carDTO.getUser().getId() + "/cars";
+        return "redirect:/users/" + carDTO.getUser().getId() + "/cars";
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/cars/{id}")
 //    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_MANAGER')")
     public CarDTO updateCar(@PathVariable("id") Long id, @RequestBody CarDTO carDTO) {
         return carService.updateCar(id, carDTO);
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/cars/{id}")
 //    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_MANAGER')")
     public void deleteCar(@PathVariable("id") Long id) {
         carService.deleteCar(id);

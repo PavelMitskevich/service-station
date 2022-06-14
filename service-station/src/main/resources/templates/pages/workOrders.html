@@ -4,8 +4,7 @@
     <meta charset="UTF-8">
     <title>My Work Orders</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
-    <link rel="stylesheet" href="C:\Users\Иван\IdeaProjects\service-station\src\main\resources\templates\css\main.css">
-    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
+    <link rel="stylesheet" href="/css/main.css">
 </head>
 <body>
      <!--Navigation-->
@@ -19,6 +18,40 @@
     <!--Navigation-->
 
     <!--Main-->
+     <section>
+         <div class="container col-lg-8">
+             <h1 class="header-table">My work orders</h1>
+             <div class="user-table">
+                 <table class="table table-striped">
+                     <thead>
+                     <tr>
+                         <th scope="col">Status</th>
+                         <th scope="col">Brand</th>
+                         <th scope="col">Model</th>
+                         <th scope="col">Phone number</th>
+                         <th scope="col">First name</th>
+                         <th scope="col">Last name</th>
+                         <th scope="col">Sum</th>
+                         <th scope="col">End time</th>
+                     </tr>
+                     </thead>
+                     <tbody>
+                     <tr th:each="workOrder: ${workOrders}">
+                         <td th:text="${workOrder.status.name}"></td>
+                         <td th:text="${workOrder.car.brand}"></td>
+                         <td th:text="${workOrder.car.model}"></td>
+                         <td th:text="${workOrder.car.user.phoneNumber}"></td>
+                         <td th:text="${workOrder.car.user.firstName}"></td>
+                         <td th:text="${workOrder.car.user.lastName}"></td>
+                         <td th:text="${workOrder.startTime}"></td>
+                         <td th:text="${workOrder.endTime}"></td>
+                     </tr>
+                     </tbody>
+                 </table>
+<!--                 <a class="btn btn-warning" th:href="@{/users/{id}(id = ${user.id})}">My info</a>-->
+             </div>
+         </div>
+     </section>
     <!--Main-->
 
     <!--Footer-->
