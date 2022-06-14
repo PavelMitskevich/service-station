@@ -3,8 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <title>My Cars</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <link rel="stylesheet" href="C:\Users\Иван\IdeaProjects\service-station\src\main\resources\templates\css\main.css">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
 </head>
 <body>
+     <!--Navigation-->
+     <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container">
+            <a class="navbar-brand" th:href="@{/}">Speed Hunters</a>
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item"><a class="nav-link active" aria-current="page" th:href="@{/loginForm}">Sign in</a></li>
+                <li class="nav-item"><a class="nav-link active" aria-current="page" th:href="@{/createUser}">Sign up</a></li>
+            </ul>
+        </div>
+    </nav>
+    <!--Navigation-->
+
+    <!--Main-->
 
 <div th:each="car : ${cars}">
     <a th:href="@{/user/{id}/cars(id = ${user.id})}">
@@ -30,5 +46,38 @@
     <a th:href="@{/createCar}">Create a new car</a>
 </div>
 
-</body>
-</html>
+<!--Main-->
+
+    <!--Footer-->
+    <footer>
+        <div class="container">
+            <div class="row footer">
+                <div class="fusion-column col-lg-6 col-md-6">
+                    <div class="content-box-column">
+                        <h2 class="content-box-footer">CALL US TODAY!</h2>
+                        <nav>
+                            <div class="contact-information">
+                                <ul>
+                                    <li><a href="tel:+375291234567">Tel: +375-(29)-123-45-67</a></li>
+                                </ul>
+                            </div>
+                        </nav>
+                    </div>
+                </div>
+                <div class="fusion-column col-lg-6 col-md-6">
+                    <div class="content-box-column">
+                        <h2 class="content-box-footer">WE ARE OPEN!</h2>
+                            <div class="contact-information">
+                                    <p>Mon-Fri 8:30-17:30</p>
+                            </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!--Footer-->
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+    
+    </body>
+    </html>

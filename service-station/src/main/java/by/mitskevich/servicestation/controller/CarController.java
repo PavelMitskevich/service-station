@@ -45,7 +45,7 @@ public class CarController {
 //        }
 //        model.addAttribute("car", carService.getCarByUserId(id));
 //        carService.getCars();
-        return "cars";
+        return "pages/cars";
     }
 
     @GetMapping("/{id}")
@@ -56,7 +56,7 @@ public class CarController {
 
     @GetMapping("/createCar")
     public String showCreateCar(CarDTO carDTO) {
-        return "createCar";
+        return "pages/createCar";
     }
 
     @PostMapping("/createCar")
@@ -67,7 +67,7 @@ public class CarController {
         carDTO = carService.createCar(carDTO);
         model.addAttribute("car", carDTO);
 
-        return "redirect:/user/" + carDTO.getUser().getId() + "/cars";
+        return "redirect:/user/" + carDTO.getUser().getId() + "/pages/cars";
     }
 
     @PutMapping("/{id}")
