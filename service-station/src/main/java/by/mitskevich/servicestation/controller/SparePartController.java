@@ -19,7 +19,7 @@ public class SparePartController {
     private final SparePartService sparePartService;
 
     @PostMapping()
-    public String createSpareParts(Model model, @ModelAttribute("createUserDTO") List<SparePartPriceDTO> sparePartPriceDTOS) {
+    public String createSpareParts(Model model, @ModelAttribute("sparePartPriceDTOS") List<SparePartPriceDTO> sparePartPriceDTOS) {
         model.addAttribute("spareParts", sparePartPriceDTOS);
         return "pages/infoOrders";
     }

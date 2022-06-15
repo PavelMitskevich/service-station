@@ -4,6 +4,7 @@ import by.mitskevich.servicestation.dto.CreateUserDTO;
 import by.mitskevich.servicestation.dto.UserDTO;
 import by.mitskevich.servicestation.service.UserService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -18,7 +19,7 @@ public class UserController {
     private final UserService userService;
 
     @GetMapping()
-//    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_MANAGER')")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_MANAGER')")
     public String getUsers(Model model) {
 
         List<UserDTO> userDTOS = userService.getUsers();
@@ -27,7 +28,7 @@ public class UserController {
     }
 
     @GetMapping("/{id}")
-//    @PreAuthorize("hasAnyRole('ROLE_USER', 'ROLE_ADMIN', 'ROLE_MANAGER')")
+    @PreAuthorize("hasAnyRole('ROLE_USER', 'ROLE_ADMIN', 'ROLE_MANAGER')")
     public String getUserById(@PathVariable("id") Long id, Model model) {
         UserDTO userDTO = userService.getUserById(id);
         model.addAttribute("user", userDTO);
@@ -53,7 +54,7 @@ public class UserController {
     }
 
     @PostMapping("/{id}")
-//    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_MANAGER')")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_MANAGER')")
     public String updateUser(@PathVariable("id") Long id,
                              Model model, @ModelAttribute("createUserDTO") CreateUserDTO createUserDTO) {
         UserDTO userDTO = userService.updateUser(id, createUserDTO);
@@ -62,7 +63,7 @@ public class UserController {
     }
 
     @DeleteMapping("/{id}")
-//    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public void deleteUser(@PathVariable("id") Long id) {
         userService.deleteUser(id);
     }
