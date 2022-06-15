@@ -1,11 +1,7 @@
 package by.mitskevich.servicestation.controller;
 
-import by.mitskevich.servicestation.dto.StatusDTO;
-import by.mitskevich.servicestation.dto.WorkOrderDTO;
-import by.mitskevich.servicestation.dto.WorkerDTO;
-import by.mitskevich.servicestation.service.StatusService;
-import by.mitskevich.servicestation.service.WorkOrderService;
-import by.mitskevich.servicestation.service.WorkerService;
+import by.mitskevich.servicestation.dto.*;
+import by.mitskevich.servicestation.service.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
@@ -27,6 +23,10 @@ public class WorkOrderController {
     private final StatusService statusService;
 
     private final WorkerService workerService;
+
+    private final CarService carService;
+
+    private final UserService userService;
 
 //    @GetMapping()
 ////    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_MANAGER')")
@@ -56,6 +56,12 @@ public class WorkOrderController {
 
         List<WorkerDTO> workerDTOS = workerService.getWorkers();
         model.addAttribute("workers", workerDTOS);
+
+        CarDTO carDTO = carService.getCarById(carId);
+        model.addAttribute("car", carDTO);
+
+        UserDTO userDTO = userService.getUserById(userId);
+        model.addAttribute("user", userDTO);
 
         WorkOrderDTO workOrderDTO = workOrderService.getWorkOrderById(id);
         model.addAttribute("workOrder", workOrderDTO);

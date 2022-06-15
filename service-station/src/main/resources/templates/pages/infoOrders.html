@@ -75,25 +75,54 @@
                              </tbody>
                          </table>
                      </div>
-<!--                     <div class="col-lg-6 col-md-6">-->
-<!--                         <div class="mb-3">-->
-<!--                             <input type="text" class="form-control" id="registerFirstName" th:field="*{firstName}"/>-->
-<!--                             <label class="form-label" for="registerFirstName">First Name</label>-->
-<!--                         </div>-->
-<!--                     </div>-->
-<!--                     <div class="col-lg-6 col-md-6">-->
-<!--                         <div class="mb-3">-->
-<!--                             <input type="text" class="form-control" id="registerFirstName" th:field="*{firstName}"/>-->
-<!--                             <label class="form-label" for="registerFirstName">First Name</label>-->
-<!--                         </div>-->
-<!--                     </div>-->
-<!--                     <div class="col-lg-6 col-md-6">-->
-<!--                         <div class="mb-3">-->
-<!--                             <input type="text" class="form-control" id="registerFirstName" th:field="*{firstName}"/>-->
-<!--                             <label class="form-label" for="registerFirstName">First Name</label>-->
-<!--                         </div>-->
-<!--                     </div>-->
                  </div>
+
+                 <div class="row justify-content-center">
+                     <div class="fusion-column col-lg-6 col-md-6">
+                         <table class="table">
+                             <thead>
+                             <tr>
+                                 <th scope="col">Brand</th>
+                                 <th scope="col">Model</th>
+                                 <th scope="col">VIN</th>
+                                 <th scope="col">Year</th>
+                             </tr>
+                             </thead>
+                             <tbody>
+                             <tr>
+                                 <th scope="col" th:text="${car.brand}"></th>
+                                 <th scope="col" th:text="${car.model}"></th>
+                                 <th scope="col" th:text="${car.vin}"></th>
+                                 <th scope="col" th:text="${car.year}"></th>
+                             </tr>
+                             </tbody>
+                         </table>
+                     </div>
+
+                     <div class="fusion-column col-lg-6 col-md-6">
+                         <table class="table">
+                             <thead>
+                             <tr>
+                                 <th scope="col">First Name</th>
+                                 <th scope="col">Last name</th>
+                                 <th scope="col">Phone number</th>
+                             </tr>
+                             </thead>
+                             <tbody>
+                             <tr>
+                                 <th scope="col" th:text="${user.firstName}"></th>
+                                 <th scope="col" th:text="${user.lastName}"></th>
+                                 <th scope="col" th:text="${user.phoneNumber}"></th>
+                             </tr>
+                             </tbody>
+                         </table>
+                     </div>
+                 </div>
+
+                 <div class="row justify-content-center">
+
+                 </div>
+
 <!--                 <a id="add_row" class="btn btn-primary float-right">Add Row</a>-->
                  <button id="add_row" class="btn btn-primary pull-left">Add Row</button>
                  <button id='delete_row' class="pull-right btn btn-primary">Delete Row</button>
