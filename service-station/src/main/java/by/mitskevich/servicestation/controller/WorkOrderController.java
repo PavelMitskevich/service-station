@@ -1,12 +1,13 @@
 package by.mitskevich.servicestation.controller;
 
-import by.mitskevich.servicestation.dto.CarDTO;
 import by.mitskevich.servicestation.dto.StatusDTO;
 import by.mitskevich.servicestation.dto.WorkOrderDTO;
-import by.mitskevich.servicestation.service.CarService;
+import by.mitskevich.servicestation.dto.WorkerDTO;
 import by.mitskevich.servicestation.service.StatusService;
 import by.mitskevich.servicestation.service.WorkOrderService;
+import by.mitskevich.servicestation.service.WorkerService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,20 +15,18 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import java.util.ArrayList;
 import java.util.List;
-
-import static java.util.Collections.addAll;
 
 @RequiredArgsConstructor
 @Controller
-//@RestController
 @RequestMapping()
 public class WorkOrderController {
 
     private final WorkOrderService workOrderService;
 
     private final StatusService statusService;
+
+    private final WorkerService workerService;
 
 //    @GetMapping()
 ////    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_MANAGER')")
@@ -39,7 +38,8 @@ public class WorkOrderController {
 
     @GetMapping("/users/{userId}/cars/{carId}/workOrders")
 //    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_MANAGER')")
-    public String getOrdersByUserId(@PathVariable("carId") Long id, Model model) {
+    public String getOrdersByUserId(@PathVariable("userId") Long userId,
+                                    @PathVariable("carId") Long id, Model model) {
         List<WorkOrderDTO> workOrderDTOS = workOrderService.getWorkOrdersByCarId(id);
 
         model.addAttribute("workOrders", workOrderDTOS);
@@ -48,9 +48,14 @@ public class WorkOrderController {
 
     @GetMapping("/users/{userId}/cars/{carId}/workOrders/{workOrderId}")
 //    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_MANAGER')")
-    public String updateWorkOrder(@PathVariable("workOrderId") Long id, Model model) {
+    public String updateWorkOrder(@PathVariable("userId") Long userId,
+                                  @PathVariable("carId") Long carId,
+                                  @PathVariable("workOrderId") Long id, Model model) {
         List<StatusDTO> statusDTOS = statusService.getStatuses();
         model.addAttribute("statuses", statusDTOS);
+
+        List<WorkerDTO> workerDTOS = workerService.getWorkers();
+        model.addAttribute("workers", workerDTOS);
 
         WorkOrderDTO workOrderDTO = workOrderService.getWorkOrderById(id);
         model.addAttribute("workOrder", workOrderDTO);
@@ -58,7 +63,10 @@ public class WorkOrderController {
     }
 
     @PostMapping("/users/{userId}/cars/{carId}/workOrders/{workOrderId}")
-    public String updateStatusAndWorkerAndTime(@PathVariable("workOrderId") Long id, Model model, WorkOrderDTO workOrderDTO) {
+//    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_MANAGER')")
+    public String updateStatusAndWorkerAndTime(@PathVariable("userId") Long userId,
+                                               @PathVariable("carId") Long carId,
+                                               @PathVariable("workOrderId") Long id, Model model, WorkOrderDTO workOrderDTO) {
 
         List<StatusDTO> statusDTOS = statusService.getStatuses();
         model.addAttribute("statuses", statusDTOS);
