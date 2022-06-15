@@ -76,7 +76,7 @@
                          </table>
                      </div>
                  </div>
-
+<!--             </form>-->
                  <div class="row justify-content-center">
                      <div class="fusion-column col-lg-6 col-md-6">
                          <table class="table">
@@ -120,7 +120,51 @@
                  </div>
 
                  <div class="row justify-content-center">
+                     <div class="col-md-12 table-responsive">
+                     <table class="table table-striped table-primary">
 
+                         <thead class="table">
+                         <tr class="table-info">
+                             <th scope="col">Brand</th>
+                             <th scope="col">Vendor code</th>
+                             <th scope="col">Price</th>
+                             <th scope="col">Discount</th>
+                         </tr>
+                         </thead>
+                         <tbody>
+                         <tr th:each="sparePart: ${spareParts}" th:style="${sparePart}">
+
+                             <td th:text="${sparePart.brand}"></td>
+                             <td th:text="${sparePart.vendorCode}"></td>
+                             <td th:text="${sparePart.price}"></td>
+                             <td th:text="${sparePart.discount}"></td>
+                         </tr>
+                         </tbody>
+                     </table>
+                         <div class="row justify-content-center">
+                             <div class="col-md-12 table-responsive">
+                     <form th:action="@{/spareParts}" th:object="${sparePartPriceDTOS}" method="post">
+                         <div class="row">
+                             <div class="col">
+<!--                                 <input type="text" class="form-control" placeholder="Brand" th:field="*{brand}"/>-->
+                                 <input type="text" class="form-control" placeholder="Brand" aria-label="Brand">
+                             </div>
+                             <div class="col">
+                                 <input type="text" class="form-control" placeholder="Vendor code" aria-label="Vendor code">
+                             </div>
+                             <div class="col">
+                                 <input type="text" class="form-control" placeholder="Price" aria-label="Price">
+                             </div>
+                             <div class="col">
+                                 <input type="text" class="form-control" placeholder="Discount" aria-label="Discount">
+                             </div>
+                         </div>
+                         <button type="submit">INSERT</button>
+                     </form>
+                            </div>
+                    </div>
+
+                    </div>
                  </div>
 
 <!--                 <a id="add_row" class="btn btn-primary float-right">Add Row</a>-->
