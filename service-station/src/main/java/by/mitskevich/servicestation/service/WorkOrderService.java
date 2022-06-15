@@ -45,4 +45,8 @@ public class WorkOrderService {
         WorkOrder workOrder = repository.findById(id).orElseThrow(EntityNotFoundException::new);
         return WorkOrderMapper.mapToDto(workOrder);
     }
+
+    public void saveWorkOrder(WorkOrderDTO workOrderDTO) {
+        repository.save(WorkOrderMapper.mapToEntity(workOrderDTO));
+    }
 }

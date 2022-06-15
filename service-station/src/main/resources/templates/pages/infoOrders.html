@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Work Order</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <link rel="stylesheet" href="/css/main.css">
+</head>
+<body>
+     <!--Navigation-->
+     <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container">
+            <a class="navbar-brand" th:href="@{/}">Speed Hunters</a>
+            <form th:action="@{/logout}" method="POST">
+                <input type="submit" value="Logout"/></form>
+        </div>
+    </nav>
+    <!--Navigation-->
+
+    <!--Main-->
+     <section>
+         <div class="container">
+             <div class="row justify-content-center">
+                 <h1 class="content-box-column">Work order</h1>
+             </div>
+             <form th:action="@{/workOrders/{workOrderId}(workOrderId = ${workOrder.id})}"
+                   th:object="${workOrderDTO}" method="POST">
+                 <div class="row justify-content-center">
+
+                     <div class="col-md-12 table-responsive">
+                         <table class="table table-bordered table-hover table-sortable" id="tab_logic">
+
+                             <thead>
+                             <tr>
+                                 <th class="text-center">Status</th>
+                                 <th class="text-center">Worker</th>
+                                 <th class="text-center">Start time</th>
+                                 <th class="text-center">End time</th>
+                                 <th class="text-center" style="border-top: 1px solid #ffffff; border-right: 1px solid #ffffff;">
+                                 </th>
+                             </tr>
+                             </thead>
+
+                             <tbody>
+
+                             <tr id='addr0' data-id="0" class="hidden">
+                                 <td data-name="name">
+                                     <select class="form-control" th:field="${workOrder.status.name}"  id="dropStatus">
+                                         <option value="0">select status</option>
+                                         <option th:each="status : ${statuses}" th:value="${status.id}" th:text="${status.name}"></option>
+                                     </select>
+<!--                                     <select name="sel0">-->
+<!--                                         <option value="">Select Option</option>-->
+<!--                                         <option value="1">IN WORK</option>-->
+<!--                                         <option value="2">READY</option>-->
+<!--                                         <option value="3">CLOSED</option>-->
+<!--                                     </select>-->
+                                 </td>
+                                 <td data-name="mail">
+                                     <select class="form-control" th:field="${workOrder.id}"  id="dropOrder">
+                                         <option value="0">select start time</option>
+                                         <option th:each="workOrder : ${workOrders}" th:value="${workOrder.id}" th:text="${workOrder.startTime}"></option>
+                                     </select>
+                                 </td>
+                                 <td data-name="desc">
+                                     <textarea name="desc0" placeholder="Description" class="form-control"></textarea>
+                                 </td>
+                                 <td data-name="sel">
+                                     <select name="sel0">
+                                         <option value="">Select Option</option>
+                                         <option value="1">Option 1</option>
+                                         <option value="2">Option 2</option>
+                                         <option value="3">Option 3</option>
+                                     </select>
+                                 </td>
+                                 <td data-name="del">
+                                     <button name="del0" class='btn btn-danger glyphicon glyphicon-remove row-remove'><span aria-hidden="true">×</span></button>
+                                 </td>
+                             </tr>
+                             </tbody>
+                         </table>
+                     </div>
+<!--                     <div class="col-lg-6 col-md-6">-->
+<!--                         <div class="mb-3">-->
+<!--                             <input type="text" class="form-control" id="registerFirstName" th:field="*{firstName}"/>-->
+<!--                             <label class="form-label" for="registerFirstName">First Name</label>-->
+<!--                         </div>-->
+<!--                     </div>-->
+<!--                     <div class="col-lg-6 col-md-6">-->
+<!--                         <div class="mb-3">-->
+<!--                             <input type="text" class="form-control" id="registerFirstName" th:field="*{firstName}"/>-->
+<!--                             <label class="form-label" for="registerFirstName">First Name</label>-->
+<!--                         </div>-->
+<!--                     </div>-->
+<!--                     <div class="col-lg-6 col-md-6">-->
+<!--                         <div class="mb-3">-->
+<!--                             <input type="text" class="form-control" id="registerFirstName" th:field="*{firstName}"/>-->
+<!--                             <label class="form-label" for="registerFirstName">First Name</label>-->
+<!--                         </div>-->
+<!--                     </div>-->
+                 </div>
+<!--                 <a id="add_row" class="btn btn-primary float-right">Add Row</a>-->
+                 <button id="add_row" class="btn btn-primary pull-left">Add Row</button>
+                 <button id='delete_row' class="pull-right btn btn-primary">Delete Row</button>
+
+                 <div class="row justify-content-center">
+                     <div class="col-lg-6 col-md-6">
+                         <button type="submit" class="btn btn-primary" value="Create">Create</button>
+                     </div>
+                 </div>
+             </form>
+         </div>
+     </section>
+    <!--Main-->
+
+    <!--Footer-->
+<footer>
+    <div class="container">
+        <div class="row footer">
+            <div class="fusion-column col-lg-6 col-md-6">
+                <div class="content-box-column">
+                    <h2 class="content-box-footer">CALL US TODAY!</h2>
+                    <nav>
+                        <div class="contact-information">
+                            <ul>
+                                <li><a href="tel:+375291234567">Tel: +375-(29)-123-45-67</a></li>
+                            </ul>
+                        </div>
+                    </nav>
+                </div>
+            </div>
+            <div class="fusion-column col-lg-6 col-md-6">
+                <div class="content-box-column">
+                    <h2 class="content-box-footer">WE ARE OPEN!</h2>
+                        <div class="contact-information">
+                                <p>Mon-Fri 8:30-17:30</p>
+                        </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+<!--Footer-->
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+
+</body>
+</html>

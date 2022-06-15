@@ -21,6 +21,7 @@ public class WorkOrderMapper {
 
     public WorkOrderDTO mapToDto(WorkOrder workOrder) {
         return WorkOrderDTO.builder()
+                .id(workOrder.getId())
                 .car(workOrder.getCar())
                 .startTime(workOrder.getStartTime())
                 .endTime(workOrder.getEndTime())

@@ -33,6 +33,7 @@
                          <th scope="col">Last name</th>
                          <th scope="col">Sum</th>
                          <th scope="col">End time</th>
+                         <th scope="col">Info</th>
                      </tr>
                      </thead>
                      <tbody>
@@ -45,10 +46,11 @@
                          <td th:text="${workOrder.car.user.lastName}"></td>
                          <td th:text="${workOrder.startTime}"></td>
                          <td th:text="${workOrder.endTime}"></td>
+                         <td><a class="btn btn-warning" th:href="@{/users/{userId}/cars/{carId}/workOrders/{workOrderId}(userId = ${workOrder.getCar().getUser().id} ,carId = ${workOrder.getCar().id}, workOrderId = ${workOrder.id})}" role="button">Work orders</a></td>
                      </tr>
                      </tbody>
                  </table>
-<!--                 <a class="btn btn-warning" th:href="@{/users/{id}(id = ${user.id})}">My info</a>-->
+                 <a class="btn btn-warning" th:href="@{/users/{id}(id = ${workOrders.get(0).getCar().getUser().id})}">My info</a>
              </div>
          </div>
      </section>
