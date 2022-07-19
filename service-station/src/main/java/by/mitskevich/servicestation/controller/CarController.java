@@ -20,11 +20,11 @@ public class CarController {
 
     private final UserService userService;
 
-    @GetMapping("/cars")
-    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_MANAGER')")
-    public List<CarDTO> getCars() {
-        return carService.getCars();
-    }
+//    @GetMapping("/cars")
+//    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_MANAGER')")
+//    public List<CarDTO> getCars() {
+//        return carService.getCars();
+//    }
 
     @GetMapping("/cars")
     public String showSignUpForm(CarDTO carDTO) {

@@ -1,4 +1,4 @@
-package by.mitskevich.servicestation.common;
+package by.mitskevich.servicestation.handler;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;

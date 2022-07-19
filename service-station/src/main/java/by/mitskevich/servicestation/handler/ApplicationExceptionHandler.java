@@ -1,6 +1,5 @@
 package by.mitskevich.servicestation.handler;
 
-import by.mitskevich.servicestation.common.ApiError;
 import by.mitskevich.servicestation.exception.CustomException;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;

@@ -69,7 +69,6 @@ public class UserService {
         Role role = user.getRole();
 
         user = UserMapper.createUserDtoToUser(createUserDTO);
-        user.setId(id);
         user.setPassword(passwordEncoder.encode(createUserDTO.getPassword()));
         user.setRole(role);
 
